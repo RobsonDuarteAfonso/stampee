@@ -1,0 +1,39 @@
+.mode_show, .timbre_status, .auction_status {
+    display: flex;
+    flex-direction: column;
+    color: var(--gray-700);
+}
+
+.mode_show .buttons {
+    display: inline-flex;
+}
+
+.mode_show button:first-child {
+    margin-right: var(--space-ss);
+}
+
+.search_lot > div {
+    display: inline-flex;
+}
+
+.search_lot input {
+    max-width: 50%;
+}
+
+.timbre_status > div {
+    display: flex;
+    flex-direction: column;
+    
+}
+
+.timbre_status label {
+    display: flex;
+    align-items: center;
+    padding: var(--space-xs);
+}
+
+.auction_status label {
+    display: flex;
+    align-items: center;
+    padding: var(--space-xs);
+}

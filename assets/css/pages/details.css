@@ -1,0 +1,120 @@
+.auction_detail {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    width: 100%;
+    padding: var(--space-md);
+}
+
+.auction_detail h1 {
+    margin-bottom: var(--space-md);
+}
+
+.auction_detail .image {
+    flex-basis: 40%;
+}
+
+.auction_detail .info {
+    flex-basis: 60%;
+    padding: var(--space-md);
+    background-color: var(--white);
+}
+
+.auction_detail figure {
+    display: flex;
+    justify-content: center;
+}
+
+.auction_detail figure > img {
+    width: auto;
+    height: 450px;
+    padding: var(--space-md) 0;
+}
+
+.auction_detail .carousel {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    margin: var(--space-lg) var(--space-x3);
+}
+
+.auction_detail .carousel > img {
+    width: auto;
+    height: 80px;
+    transition: transform 0.3s ease;
+}
+
+.auction_detail .carousel > img:hover {
+    transform: scale(1.2);
+    cursor: pointer;
+}
+
+.info {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    width: 100%;
+}
+
+.info .info_lot {
+    font-size: var(--font-lg);
+    font-weight: var(--font-wgt-bold);
+}
+
+.info .info_title {
+    padding: var(--space-lg) 0;
+    font-size: var(--font-md);
+    font-weight: var(--font-wgt-bold);
+}
+
+.info_table {
+    margin: var(--space-lg) 0;
+}
+
+.info_table td {
+    width: 50%;
+    text-align: center;
+    padding: var(--space-sm) 0;
+    border: 1px solid var(--gray-100) ;
+}
+
+.info_table th {
+    background-color: var(--gray-100);
+    padding: var(--space-sm) 0;
+}
+
+.info_buttons {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+@media screen and (max-width: 1485px) {
+
+    .auction_detail {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: nowrap;
+        align-items: center;
+    }
+
+    .image {
+        flex-basis: 100%;
+    }
+
+    .info {
+        flex-basis: 100%;
+    }
+}
+
+@media screen and (max-width: 565px) {
+    
+    .info_buttons {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .info_buttons a:first-child {
+        margin-bottom: var(--space-sm);
+    }
+
+}

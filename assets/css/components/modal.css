@@ -1,0 +1,28 @@
+.modal {
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden; /*Je dois appliquer ceci à la balise body*/
+    background-color: var(--black);
+}
+
+.search {
+    display: none;
+}
+.menu {
+    display: none;
+}
+
+.modal > nav {
+    margin: 15% auto;
+}
+
+.modal > form {
+    width: 100%;
+    margin: 15% auto;
+    display: inline-flex;
+    justify-content: center;
+}

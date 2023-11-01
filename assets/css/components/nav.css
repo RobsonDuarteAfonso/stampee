@@ -1,0 +1,25 @@
+.main_menu {
+    display: flex;
+    justify-content: center;
+    height: 5.3vh;
+    background-color: var(--gray-300);
+}
+.main_menu > ul {
+    display: inline-flex;
+    justify-content: space-between;
+}
+
+.main_menu > ul > li {
+    list-style-type: none;
+    font-weight: var(--font-wgt-bold);
+    font-size: var(--font-md);
+}
+
+
+@media screen and (max-width: 1350px) {
+
+    .main_menu {
+        display: none;
+    }
+
+}

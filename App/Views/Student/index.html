@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block title %}Étudiant{% endblock %}
+
+{% block body %}
+
+    <h1>Welcome page liste etudiants</h1>
+    <ul>
+        {% for student in students %}
+        <p>{{ student.id }} - {{ student.name }} - {{ student.age }}</p>
+        {% endfor %}
+    </ul>
+
+{% endblock %}

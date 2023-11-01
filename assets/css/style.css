@@ -1,0 +1,21 @@
+/* Base */
+@import url(base/base.css);
+@import url(base/links.css);
+
+/* Form */
+@import url(form/button.css);
+@import url(form/form.css);
+@import url(form/input.css);
+
+/* Pages */
+@import url(pages/catalog.css);
+@import url(pages/details.css);
+@import url(pages/home.css);
+
+/* Composante */
+@import url(components/nav.css);
+@import url(components/header.css);
+@import url(components/article.css);
+@import url(components/filter.css);
+@import url(components/footer.css);
+@import url(components/modal.css);

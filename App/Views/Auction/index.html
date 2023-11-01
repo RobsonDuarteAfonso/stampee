@@ -1,0 +1,189 @@
+{% extends "base.html" %}
+
+{% block title %}Enchères{% endblock %}
+
+{% block main %}
+
+    <main>
+
+        <aside class="filter">
+
+            <section class="mode_show">
+                <h1>Mode d'affichage</h1>
+                <div class="buttons">
+                    <button type="button" class="bt bt-x2 bt-bg-gray-700"><i class="material-icons">view_list</i></button>
+                    <button type="button" class="bt bt-x2 bt-bg-gray-700"><i class="material-icons">view_module</i></button>
+                </div>
+            </section>
+            <section class="search_lot">
+                <h1>Numéro de lot</h1>
+                <div action="#" method="post">
+                    <input type="text" class="rechercher" name="lot" aria-label="lot" placeholder="Nombre">
+                    <button type="submit" class="bt bt-x2 bt-bg-gray-700"><i class="material-icons">search</i></button>
+                </div>
+            </section>
+            <section class="select_country">
+                <h1>Choisissez un pays</h1>
+                <select name="country" aria-label="country">
+                    <option value="0">Sélectionner</option>
+                    <option value="1">Canada</option>
+                    <option value="2">Etats-Unis</option>
+                    <option value="2">France</option>
+                </select>
+            </section>
+            <section class="timbre_status">
+                
+                <fieldset class="checkboxs">
+                    <legend><h1>Statut du timbre</h1></legend>
+                    <label><input type="checkbox" name="state" value="1">Neuf</label>
+                    <label><input type="checkbox" name="state" value="1">Sous Neuf</label>
+                    <label><input type="checkbox" name="state" value="1">Usagé</label>
+                    <label><input type="checkbox" name="state" value="1">Endommagé</label>
+                </fieldset>
+            </section>
+            <section class="auction_status">
+                
+                <fieldset class="checkboxs">
+                    <legend><h1>Statut des Enchères</h1></legend>
+                    <label><input type="checkbox" name="status" value="1">En cours</label>
+                    <label><input type="checkbox" name="status" value="1">Terminé</label>
+                </fieldset>
+            </section>
+
+        </aside>
+
+        <section class="article_list">
+            <h1 class="title">Catalogue</h1>
+            <!-- Le remplacement de la classe "card" par "list" modifie le mode d'affichage de la liste des enchères. -->
+            <div class="container list">
+                <!-- Si vous ajoutez la classe "invisible", les favoris ne seront plus affichés. -->
+                <section class="favorites">
+                    <h1 class="favorites_title">Favoris</h1>
+                    <article>
+                        <figure>
+                            <img src="../../assets/img/timbre1.png" alt="Timbre 1">                            
+                        </figure>
+                        <h1>Titre du Timbre Lord Stampee</h1>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Lot #</th>
+                                    <th>Vl. Initiale</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>3452</td>
+                                    <td>300.00 $</td>
+                                </tr>
+                            </tbody>
+                            <thead>
+                                <tr>
+                                    <th>Offre Actuelle</th>
+                                    <th>Fermeture</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>149.00 $</td>
+                                    <td>2023-11-23</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <footer>
+                            <a href="#" class="bt bt-md bt-bg-red"><span class="material-icons">beenhere</span>Faire une offre</a>
+                            <a href="#" class="bt bt-md bt-bd-gray"><span class="material-icons">remove_circle</span>Enlever des favoris</a>
+                        </footer>
+                    </article>
+                    <article>
+                        <figure>
+                            <img src="../../assets/img/timbre2.png" alt="Timbre 2">
+                        </figure>
+                        <h1>Titre du Timbre Lord Stampee</h1>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Lot #</th>
+                                    <th>Vl. Initiale</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>3452</td>
+                                    <td>300.00 $</td>
+                                </tr>
+                            </tbody>
+                            <thead>
+                                <tr>
+                                    <th>Offre Actuelle</th>
+                                    <th>Fermeture</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>149.00 $</td>
+                                    <td>2023-11-23</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <footer>
+                            <a href="#" class="bt bt-md bt-bg-red"><span class="material-icons">beenhere</span>Faire une offre</a>
+                            <a href="#" class="bt bt-md bt-bd-gray"><span class="material-icons">remove_circle</span>Enlever des favoris</a>
+                        </footer>
+                    </article>                                      
+                </section>
+                <article>
+                    <figure>
+                        <img src="../../assets/img/timbre1.png" alt="Timbre 1">                            
+                    </figure>
+                    <h1>Titre du Timbre Lord Stampee</h1>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Lot #</th>
+                                <th>Vl. Initiale</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>3452</td>
+                                <td>300.00 $</td>
+                            </tr>
+                        </tbody>
+                        <thead>
+                            <tr>
+                                <th>Offre Actuelle</th>
+                                <th>Fermeture</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>149.00 $</td>
+                                <td>2023-11-23</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <footer>
+                        <a href="#" class="bt bt-md bt-bg-red"><span class="material-icons">beenhere</span>Faire une offre</a>
+                        <a href="#" class="bt bt-md bt-bd-gray"><span class="material-icons">favorite</span>Ajouter aux favori</a>
+                    </footer>
+                </article>                                                                                
+            </div>        
+            
+            <div class="pagination">
+                <button type="button" class="bt bt-x3 bt-bg-red"><i class="material-icons">navigate_before</i></button>
+                <button type="button" class="bt bt-x3 bt-bg-red"><i class="material-icons">first_page</i></button>
+                <button type="button" class="bt bt-x3 bt-bg-gray"><i class="material-icons">looks_one</i></button>
+                <button type="button" class="bt bt-x3 bt-bg-red"><i class="material-icons">looks_two</i></button>
+                <button type="button" class="bt bt-x3 bt-bg-red"><i class="material-icons">looks_3</i></button>
+                <button type="button" class="bt bt-x3 bt-bg-red"><i class="material-icons">looks_4</i></button>
+                <button type="button" class="bt bt-x3 bt-bg-red"><i class="material-icons">looks_5</i></button>
+                <button type="button" class="bt bt-x3 bt-bg-red"><i class="material-icons">last_page</i></button>
+                <button type="button" class="bt bt-x3 bt-bg-red"><i class="material-icons">navigate_next</i></button>
+            </div>
+
+        </section>
+
+    </main>
+
+{% endblock %}

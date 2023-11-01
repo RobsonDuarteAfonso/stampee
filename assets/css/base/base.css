@@ -1,0 +1,45 @@
+@import url('https://fonts.googleapis.com/css2?family=Amiko:wght@400;700&family=Fredoka:wght@400;600&display=swap');
+
+:root {
+    --white: #ffffff;
+    --gray-100: #efefef;
+    --gray-300: #b4b4b4;
+    --gray-500: #6e6d6d;
+    --gray-700: #434343;
+    --black: #000000;
+    --red-100: #ffb2b2;
+    --red-300: #ff0000;
+    --red-500: #e30613;
+    --red-700: #b70000;
+
+    --font-fredoka: fredoka;
+    --font-amiko: amiko;
+
+    --font-wgt-normal: 400;
+    --font-wgt-bold: 700;
+
+    --font-x2: 4rem;
+    --font-x1: 3rem;
+    --font-xl: 2rem;
+    --font-lg: 1.5rem;
+    --font-md: 1.17rem;
+    --font-nm: 1rem;
+    --font-sm: 0.875rem;
+    --font-xs: 0.83rem;
+
+    --space-x3: 60px;
+    --space-x2: 50px;
+    --space-xl: 40px;
+    --space-lg: 30px;
+    --space-md: 20px;
+    --space-ss: 15px;
+    --space-sm: 10px;
+    --space-xs: 5px;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: var(--font-fredoka);
+}

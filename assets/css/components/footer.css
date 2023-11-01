@@ -1,0 +1,116 @@
+footer h1 {
+    font-size: var(--font-md);
+    font-weight: var(--font-wgt-bold);
+    color: var(--gray-700);
+    margin-bottom: var(--space-sm);
+}
+
+.footer_info {
+    display: flex;
+    justify-content: center;
+    background-color: var(--gray-300);
+    height: 200px;
+    padding: 0 10%;
+}
+
+.footer_copyright {
+    background-color: var(--red-700);
+    height: 40px;
+    color: var(--white);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.footer_logos {
+    flex-basis: 25%;
+    padding: var(--space-sm) 0 ;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.footer_links, .footer_address, .footer_times{
+    flex-basis: 25%;
+    padding: var(--space-md) 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.footer_links li {
+    list-style-type: none;
+    padding: var(--space-xm) 0;
+}
+
+.footer_times > p, .footer_address > p {
+    color: var(--gray-700);
+    padding: var(--space-xm) 0;
+}
+
+.footer_logos-social_network {
+    padding-left: var(--space-md);
+    padding-top: var(--space-sm);
+}
+
+.footer_logos-container {
+    display: inline-flex;
+    justify-content: space-between;
+    width: 120px
+}
+
+.facebook_logo, .twitter_logo, .instagram_logo {    
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+    background-size: cover;    
+    border: none;
+    background-color: var(--gray-300);
+}
+
+.facebook_logo {
+    background-image: url("../../img/facebook.png");
+}
+
+.facebook_logo:hover {
+    background-image: url("../../img/facebook2.png");
+}
+
+.twitter_logo {
+    background-image: url("../../img/twitter.png");
+}
+
+.twitter_logo:hover {
+    background-image: url("../../img/twitter2.png");
+}
+
+.instagram_logo {
+    background-image: url("../../img/instagram.png");
+}
+
+.instagram_logo:hover {
+    background-image: url("../../img/instagram2.png");
+}
+
+@media screen and (max-width: 1240px) {
+
+    .footer_info {
+        flex-wrap: wrap;
+        height: auto;
+    }
+
+    .footer_logos, .footer_links, .footer_address, .footer_times {
+        flex-basis: 50%;
+    }
+
+}
+ 
+@media screen and (max-width: 760px) {
+
+    .footer_logos, .footer_links, .footer_address, .footer_times {
+        flex-basis: 100%;
+        justify-content: center;
+    }
+
+}

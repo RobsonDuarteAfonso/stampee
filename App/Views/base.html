@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="{{url_root}}assets/css/style.css">
+    <title>Stampee - {% block title %}{% endblock %}</title>
+</head>
+<body>
+
+    <header>
+
+        <figure>
+            <a href="{{url_root}}public">
+                <img src="{{url_root}}assets/img/logo1.png" alt="logo">
+            </a>
+        </figure>
+
+        <div class="header_right">
+            <form action="#" method="post">
+                <input type="search" class="rechercher" name="search" aria-label="search" placeholder="Rechercher">
+                <button type="submit" class="bt bt-x2 bt-bg-red"><i class="material-icons">search</i></button>
+            </form>
+            <aside>
+                <a href="#" class="bt bt-md bt-bd-white">
+                    <span class="material-icons">person_add</span>
+                    S'inscrire
+                </a>
+                <a href="{{url_root}}public/login/index" class="bt bt-md bt-bg-red">
+                    <span class="material-icons">login</span>
+                    Se connecter
+                </a>
+                <a href="#" class="bt bt-md bt-bd-white">
+                    <span class="material-icons">shopping_cart</span>
+                    Panier
+                </a>
+            </aside>
+        </div>
+
+        <div class="header_right-mobile">
+            <a href="#" class="bt bt-sm bt-bd-white">
+                <i class="material-icons">search</i></a>
+            <a href="#" class="bt bt-sm bt-bd-white">
+                <i class="material-icons">reorder</i></a>
+        </div>
+
+        <div class="modal search">
+            <form action="#" method="post">
+                <input type="search" class="rechercher" name="search" aria-label="search" placeholder="Rechercher">
+                <button type="submit" class="bt bt-x2 bt-bg-red"><i class="material-icons">search</i></button>
+            </form>
+        </div>
+
+        <div class="modal menu">
+            <nav>
+                <ul>
+                    <li><a href="{{url_root}}public" class="bt bt-md bt-bg-gray">Accueil</a></li>
+                    <li><a href="#" class="bt bt-md bt-bg-gray">À propos</a></li>
+                    <li><a href="#" class="bt bt-md bt-bg-gray">Consignation</a></li>
+                    <li><a href="{{url_root}}public/auction/index" class="bt bt-md bt-bg-gray">Enchères</a></li>
+                    <li><a href="#" class="bt bt-md bt-bg-gray">Contact</a></li>
+                </ul>                
+                <a href="#" class="bt bt-md bt-bd-white">
+                    <span class="material-icons">person_add</span>
+                    S'inscrire
+                </a>
+                <a href="#" class="bt bt-md bt-bg-red">
+                    <span class="material-icons">login</span>
+                    Se connecter
+                </a>
+                <a href="#" class="bt bt-md bt-bd-white">
+                    <span class="material-icons">shopping_cart</span>
+                    Panier
+                </a>
+            </nav>
+            <footer>
+
+            </footer>            
+        </div>
+
+    </header>
+
+    <nav class="main_menu">
+        <ul>
+            <li><a href="{{url_root}}public" class="bt bt-md bt-bg-gray">Accueil</a></li>
+            <li><a href="#" class="bt bt-md bt-bg-gray">À propos</a></li>
+            <li><a href="#" class="bt bt-md bt-bg-gray">Consignation</a></li>
+            <li><a href="{{url_root}}public/auction/index" class="bt bt-md bt-bg-gray">Enchères</a></li>
+            <li><a href="#" class="bt bt-md bt-bg-gray">Contact</a></li>
+        </ul>
+    </nav>
+
+    {% block main %}
+    {% endblock %}
+
+    <footer>
+
+        <div class="footer_info">
+
+            <section class="footer_logos">
+                <figure>
+                    <img src="{{url_root}}assets/img/logo2.png" alt="logo">
+                </figure>
+                <div class="footer_logos-social_network">
+                    <h1>Nous suivre</h1>
+                    <div class="footer_logos-container">
+                        <button href="#" class="facebook_logo"></button>
+                        <button href="#" class="twitter_logo"></button>
+                        <button href="#" class="instagram_logo"></button>
+                    </div>
+                </div>
+            </section>
+
+            <section class="footer_links">
+                <h1>Liens Utiles</h1>
+                <ul>
+                    <li><a class="link" href="#">À propos</a></li>
+                    <li><a class="link" href="#">Consignation</a></li>
+                    <li><a class="link" href="#">Enchères</a></li>
+                    <li><a class="link" href="#">Contact</a></li>
+                </ul>
+            </section>
+
+            <section class="footer_times">
+                <h1>Heures d'ouvertures</h1>
+                <p>Lundi au Vendredi</p>
+                <p>10h00 - 17h00</p>
+                <p>Samadi et Dimanche</p>
+                <p>Fermé</p>
+            </section>             
+
+            <section class="footer_address">
+                <h1>Notre Adresse</h1>
+                <p>4391 Rue Sainte Catherine</p>
+                <p>2e étage salle 235</p>
+                <p>Code Postal H4Y 3G9</p>
+                <p>Montréal - Quebec</p>
+            </section>            
+
+        </div>
+
+        <div class="footer_copyright">
+            <p>Copyright © 2023 Lord Stampee - Tous droits réservés.</p>
+        </div>
+
+    </footer>
+
+</body>
+</html>
