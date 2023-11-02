@@ -66,7 +66,6 @@ CREATE TABLE IF NOT EXISTS `stampee`.`auction` (
   `date_start` DATETIME NOT NULL,
   `date_end` DATETIME NOT NULL,
   `price` DECIMAL(18,2) NOT NULL,
-  `image` VARCHAR(45) NOT NULL,
   `user_id` INT NOT NULL,
   `state_id` INT NOT NULL,
   `status_id` INT NOT NULL,
@@ -134,6 +133,25 @@ CREATE TABLE IF NOT EXISTS `stampee`.`comment` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `stampee`.`image`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `stampee`.`image` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `link` VARCHAR(45) NOT NULL,
+  `main` INT NOT NULL,
+  `auction_id` INT NOT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `fk_image_auction1_idx` (`auction_id` ASC),
+  CONSTRAINT `fk_image_auction1`
+    FOREIGN KEY (`auction_id`)
+    REFERENCES `stampee`.`auction` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
 
 
 -- -----------------------------------------------------

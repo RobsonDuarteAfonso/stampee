@@ -13,26 +13,26 @@
                 <input type="hidden" name="status_id" value="1">
                 
                 <label for="name">Titre</label>
-                <input type="text" class="rechercher" name="name" id="name" placeholder="Titre">
+                <input type="text" class="rechercher" name="name" id="name" placeholder="Titre" required>
 
                 <label for="description">Description</label>
-                <textarea name="description" id="description" cols="30" rows="10"></textarea>
+                <textarea name="description" id="description" cols="30" rows="10" required></textarea>
 
                 <label for="country">Pays</label>
-                <input type="text" class="rechercher" name="country" id="country" placeholder="Pays">
+                <input type="text" class="rechercher" name="country" id="country" placeholder="Pays" required>
 
                 <label for="price">Prix</label>
-                <input type="text" class="rechercher" name="price" id="price" placeholder="Prix">
+                <input type="text" class="rechercher" name="price" id="price" placeholder="Prix" required>
 
                 <label for="date_start">Date Initiale</label>
-                <input type="date" class="rechercher" name="date_start" id="date_start" placeholder="Date Initiale">                
+                <input type="date" class="rechercher" name="date_start" id="date_start" placeholder="Date Initiale" required>                
 
                 <label for="date_end">Date Finale</label>
-                <input type="date" class="rechercher" name="date_end" id="date_end" placeholder="Date Finale">
+                <input type="date" class="rechercher" name="date_end" id="date_end" placeholder="Date Finale" required>
 
                 <label for="state">State</label>
-                <select name="state_id" id="state">
-                    <option value="0">Sélectionner</option>
+                <select name="state_id" id="state" required>
+                    <option value="">Sélectionner</option>
                     {% if states|length > 0 %}
                         {% for item in states %}
                             <option value="{{ item.id }}">{{ item.state }}</option>

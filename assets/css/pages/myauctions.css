@@ -10,12 +10,12 @@
     margin-bottom: var(--space-md);
 }
 
-.my_actions-title > th {
+.my_actions-title th {
     color: var(--white);
     background-color: var(--gray-500);
 }
 
-.my_actions-timbre {
-    width: 80px;
-    height: 100px;
+.my_actions-datas td {
+text-align: center;
 }
+

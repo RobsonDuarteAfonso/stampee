@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block title %}Ajouter des Image{% endblock %}
+
+{% block main %}
+
+    <main>
+
+        <section class="create_auction">
+            <h1 class="title">Ajouter des Images - Lot #{{id}}</h1>
+            <form action="{{path_root}}public/auction/upload" method="post" enctype="multipart/form-data">
+
+                <input type="hidden" name="auction_id" value="{{id}}">
+                
+                <label for="images">Téléchargement d'images</label>
+                <input type="file" name="images[]" id="images" multiple accept="image/*" required>
+
+                <button type="submit" class="bt bt-md bt-bg-red">
+                    <span class="material-icons">send</span>Envoyer
+                </button>
+            </form>
+        </header>
+
+    </main>
+
+{% endblock %}

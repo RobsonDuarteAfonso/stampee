@@ -12,7 +12,7 @@ class Config
     /**
      * URL root
      */
-    const URL_ROOT = "http://localhost/stampee/";
+    const URL_ROOT = "http://localhost:8000/stampee/";
 
     /**
      * Database host

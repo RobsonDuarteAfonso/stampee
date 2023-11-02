@@ -12,8 +12,13 @@
     height: var(--space-x2);    
 }
 
+.bt-md2 {
+    min-width: 50px;
+    height: var(--space-x2);  
+}
+
 .bt-sm {
-    width: var(--space-lg);
+    min-width: var(--space-lg);
     height: var(--space-lg);
 }
 

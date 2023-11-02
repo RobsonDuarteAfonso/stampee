@@ -70,5 +70,27 @@ class Auction extends \Core\Model
         } else {
             throw new Exception($stmt->errorInfo(), 1);
         }
-    } 
+    }
+
+
+    public static function insertImage($id)
+    {
+
+        if ($id) {
+
+            $db = static::getDB();
+            
+            $sql = "INSERT INTO image (auction_id) VALUES (:id)";
+
+            $stmt = $db->prepare($sql);
+
+            $stmt->bindValue(":id", $id);
+        }
+        
+        if($stmt->execute()) {
+            return $db->lastInsertId();
+        } else {
+            throw new Exception($stmt->errorInfo(), 1);
+        }
+    }     
 }

@@ -10,9 +10,9 @@
             <h1 class="title">Login</h1>
             <form action="{{path_root}}public/login/auth" method="post">
                 <label for="email">Utilisateur</label>
-                <input type="email" class="rechercher" name="email" id="email" placeholder="Utilisateur">
+                <input type="email" class="rechercher" name="email" id="email" placeholder="Utilisateur" required>
                 <label for="password">Mot de passe</label>
-                <input type="password" class="rechercher" name="password" id="password" placeholder="Mot de passe">
+                <input type="password" class="rechercher" name="password" id="password" placeholder="Mot de passe" required>
                 <button type="submit" class="bt bt-md bt-bg-red">
                     <span class="material-icons">send</span>Connecter
                 </button>
