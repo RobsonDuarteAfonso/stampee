@@ -9,7 +9,6 @@ namespace App;
  */
 class Config
 {
-
     /**
      * URL root
      */
@@ -25,7 +24,7 @@ class Config
      * Database name
      * @var string
      */
-    const DB_NAME = 'teste';
+    const DB_NAME = 'stampee';
 
     /**
      * Database user

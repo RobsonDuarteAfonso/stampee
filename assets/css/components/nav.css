@@ -1,7 +1,7 @@
 .main_menu {
     display: flex;
     justify-content: center;
-    height: 5.3vh;
+    /* min-height: 5.3vh; */
     background-color: var(--gray-300);
 }
 .main_menu > ul {

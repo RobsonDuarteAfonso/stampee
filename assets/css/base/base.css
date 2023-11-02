@@ -43,3 +43,9 @@
     box-sizing: border-box;
     font-family: var(--font-fredoka);
 }
+
+.no_date{
+    text-align: center;
+    padding: 20px 0;
+    font-weight: bold;
+}

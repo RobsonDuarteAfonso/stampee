@@ -1,0 +1,40 @@
+.login {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: var(--space-md);
+    height: 59vh;
+}
+
+.login h1 {
+    margin-bottom: var(--space-md);
+}
+
+.login form {
+    display: flex;
+    flex-direction: column;
+}
+
+.login button {
+    width: 200px;
+}
+
+.login label {
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.login input {
+    margin-bottom: 20px;
+}
+
+@media screen and (max-width: 1485px) {
+
+
+}
+
+@media screen and (max-width: 565px) {
+    
+
+
+}

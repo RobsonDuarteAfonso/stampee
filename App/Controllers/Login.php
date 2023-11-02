@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use \Core\View;
+use \Core\RedirectPage;
 
 /**
  * Home controller
@@ -19,45 +20,37 @@ class Login extends \Core\Controller
      */
     public function indexAction()
     {
-        View::renderTemplate('Login/index.html',['url_root'=>$this->url_root]);
+        View::renderTemplate('Login/index.html');
     }
 
-        /**
+    /**
      * Show the show page
      *
      * @return void
      */
-    public function showAction()
+    public function authAction()
     {
-        //print_r($this->route_params);
-        $id = $this->route_params['id'];
+        if ($_SERVER["REQUEST_METHOD"] != "POST") {
 
-        View::renderTemplate('Student/show.html',['id'=>$id]);
-    }
-
-    /**
-     * Show the index page
-     *
-     * @return void
-     */
-    public function createAction()
-    {       
-        View::renderTemplate('Student/create.html');
-    }
-
-    /**
-     * Show the index page
-     *
-     * @return void
-     */
-    public function storeAction()
-    {
-        if (!empty($_POST)) {
-            $liste = \App\Models\Student::insert($_POST);
-            header("location:/php-mvc/public");
+            RedirectPage::redirect("login/index");
             exit();
         }
-        
-        View::renderTemplate('Student/create.html');
-    }     
+
+        $checked = \App\Models\Login::checkUser($_POST);
+
+        if ($checked) {
+
+            RedirectPage::redirect("home/index");
+
+        } else {
+
+            RedirectPage::redirect('login/index');
+        }
+    } 
+
+    public function logout() {
+
+        session_destroy();
+        RedirectPage::redirect('login/index');
+    }
 }

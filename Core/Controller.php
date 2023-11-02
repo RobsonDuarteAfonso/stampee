@@ -15,7 +15,6 @@ abstract class Controller
      * @var array
      */
     protected $route_params = [];
-    protected $url_root = "";
 
     /**
      * Class constructor
@@ -27,7 +26,6 @@ abstract class Controller
     public function __construct($route_params)
     {
         $this->route_params = $route_params;
-        $this->url_root = \App\Config::URL_ROOT;
     }
 
     /**

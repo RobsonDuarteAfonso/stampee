@@ -1,0 +1,39 @@
+.create_auction {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: var(--space-md);
+}
+
+.create_auction h1 {
+    margin-bottom: var(--space-md);
+}
+
+.create_auction form {
+    display: flex;
+    flex-direction: column;
+}
+
+.create_auction button {
+    width: 200px;
+}
+
+.create_auction label {
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.create_auction input, select {
+    margin-bottom: 20px;
+}
+
+@media screen and (max-width: 1485px) {
+
+
+}
+
+@media screen and (max-width: 565px) {
+    
+
+
+}

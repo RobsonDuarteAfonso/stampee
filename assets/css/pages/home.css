@@ -34,6 +34,16 @@
     max-width: 200px;
 }
 
+.name_user {
+    display: flex;
+    align-items: center;
+    color: var(--white);
+}
+
+.name_user-text {
+    margin-left: 5px;
+}
+
 @media screen and (max-width: 1350px) {
 
     .header-hero-home {

@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block title %}Mes Enchères{% endblock %}
+
+{% block main %}
+
+    <main>
+
+        <section class="my_auctions">
+            <h1 class="title">Mes Enchères</h1>
+            <table>
+                <tr class="my_actions-title">
+                    <th>image</th>
+                    <th>titre</th>
+                    <th>pays</th>
+                    <th>state</th>
+                    <th>date initiale</th>
+                    <th>date finale</th>
+                    <th>prix</th>
+                    <th>status</th>
+                    <th colspan="2">                
+                        <a href="{{path_root}}public/auction/create" class="bt bt-md bt-bg-red">
+                            <span class="material-icons">add_circle</span>Ajouter
+                        </a>
+                    </th>
+                </tr>
+                {% if auctions|length > 0 %}
+                    {% for auction in auctions %}
+                        <tr>
+                            <td><img src="{{path_root}}assets/img/timbre1.png" alt="timbre" class="my_actions-timbre"></td>
+                            <td>{{ auction.name }}</td>
+                            <td>{{ auction.country }}</td>
+                            <td>{{ auction.state }}</td>
+                            <td>{{ auction.date_start }}</td>
+                            <td>{{ auction.date_end }}</td>
+                            <td>{{ auction.price }}</td>
+                            <td>{{ auction.status }}</td>
+                            <td>
+                                <button type="submit" class="bt bt-md bt-bd-gray">
+                                    <span class="material-icons">edit_square</span>Modifier
+                                </button>
+                            </td>
+                            <td>
+                                <button type="submit" class="bt bt-md bt-bd-gray">
+                                    <span class="material-icons">remove_circle</span>Supprimer
+                                </button>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                {% else %}
+                <tr>
+                    <td class="no_date" colspan="10">Il n'y a aucune donnée à afficher.</td>
+                </tr>
+                {% endif %}
+            </table>
+        </header>
+
+    </main>
+
+{% endblock %}

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="{{url_root}}assets/css/style.css">
+    <link rel="stylesheet" href="{{path_root}}assets/css/style.css">
     <title>Stampee - {% block title %}{% endblock %}</title>
 </head>
 <body>
@@ -12,8 +12,8 @@
     <header>
 
         <figure>
-            <a href="{{url_root}}public">
-                <img src="{{url_root}}assets/img/logo1.png" alt="logo">
+            <a href="{{path_root}}public">
+                <img src="{{path_root}}assets/img/logo1.png" alt="logo">
             </a>
         </figure>
 
@@ -23,14 +23,28 @@
                 <button type="submit" class="bt bt-x2 bt-bg-red"><i class="material-icons">search</i></button>
             </form>
             <aside>
-                <a href="#" class="bt bt-md bt-bd-white">
-                    <span class="material-icons">person_add</span>
-                    S'inscrire
-                </a>
-                <a href="{{url_root}}public/login/index" class="bt bt-md bt-bg-red">
-                    <span class="material-icons">login</span>
-                    Se connecter
-                </a>
+                {% if session|length > 0 %}
+                    <div class="name_user">
+                        <span class="material-icons">person</span>
+                        <span class="name_user-text">{{ session.user_nom }}</span>
+                    </div>
+                    <a href="{{path_root}}public/login/logout" class="bt bt-md bt-bg-red">
+                        <span class="material-icons">logout</span>
+                        Se déconnecter
+                    </a>
+                {% else %}
+
+                    <a href="{{path_root}}public/user/create" class="bt bt-md bt-bd-white">
+                        <span class="material-icons">person_add</span>
+                        S'inscrire
+                    </a>
+                    <a href="{{path_root}}public/login/index" class="bt bt-md bt-bg-red">
+                        <span class="material-icons">login</span>
+                        Se connecter
+                    </a>
+                {% endif %}
+
+
                 <a href="#" class="bt bt-md bt-bd-white">
                     <span class="material-icons">shopping_cart</span>
                     Panier
@@ -55,17 +69,17 @@
         <div class="modal menu">
             <nav>
                 <ul>
-                    <li><a href="{{url_root}}public" class="bt bt-md bt-bg-gray">Accueil</a></li>
+                    <li><a href="{{path_root}}public" class="bt bt-md bt-bg-gray">Accueil</a></li>
                     <li><a href="#" class="bt bt-md bt-bg-gray">À propos</a></li>
                     <li><a href="#" class="bt bt-md bt-bg-gray">Consignation</a></li>
-                    <li><a href="{{url_root}}public/auction/index" class="bt bt-md bt-bg-gray">Enchères</a></li>
+                    <li><a href="{{path_root}}public/auction/index" class="bt bt-md bt-bg-gray">Enchères</a></li>
                     <li><a href="#" class="bt bt-md bt-bg-gray">Contact</a></li>
                 </ul>                
-                <a href="#" class="bt bt-md bt-bd-white">
+                <a href="{{path_root}}public/user/create" class="bt bt-md bt-bd-white">
                     <span class="material-icons">person_add</span>
                     S'inscrire
                 </a>
-                <a href="#" class="bt bt-md bt-bg-red">
+                <a href="{{path_root}}public/login/index" class="bt bt-md bt-bg-red">
                     <span class="material-icons">login</span>
                     Se connecter
                 </a>
@@ -83,10 +97,13 @@
 
     <nav class="main_menu">
         <ul>
-            <li><a href="{{url_root}}public" class="bt bt-md bt-bg-gray">Accueil</a></li>
+            <li><a href="{{path_root}}public" class="bt bt-md bt-bg-gray">Accueil</a></li>
             <li><a href="#" class="bt bt-md bt-bg-gray">À propos</a></li>
             <li><a href="#" class="bt bt-md bt-bg-gray">Consignation</a></li>
-            <li><a href="{{url_root}}public/auction/index" class="bt bt-md bt-bg-gray">Enchères</a></li>
+            <li><a href="{{path_root}}public/auction/index" class="bt bt-md bt-bg-gray">Enchères</a></li>
+            {% if session|length > 0 %}
+            <li><a href="{{path_root}}public/auction/myauctions" class="bt bt-md bt-bg-gray">Mes Enchères</a></li>
+            {% endif %}
             <li><a href="#" class="bt bt-md bt-bg-gray">Contact</a></li>
         </ul>
     </nav>
@@ -100,7 +117,7 @@
 
             <section class="footer_logos">
                 <figure>
-                    <img src="{{url_root}}assets/img/logo2.png" alt="logo">
+                    <img src="{{path_root}}assets/img/logo2.png" alt="logo">
                 </figure>
                 <div class="footer_logos-social_network">
                     <h1>Nous suivre</h1>
