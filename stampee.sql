@@ -36,6 +36,16 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
+-- Table `stampee`.`status`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `stampee`.`status` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `status` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
 -- Table `stampee`.`state`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `stampee`.`state` (
@@ -46,12 +56,21 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `stampee`.`status`
+-- Table `stampee`.`stamp`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `stampee`.`status` (
+CREATE TABLE IF NOT EXISTS `stampee`.`stamp` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `status` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`id`))
+  `name` VARCHAR(45) NOT NULL,
+  `description` TEXT NOT NULL,
+  `country` VARCHAR(45) NOT NULL,
+  `state_id` INT NOT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `fk_stamp_state1_idx` (`state_id` ASC),
+  CONSTRAINT `fk_stamp_state1`
+    FOREIGN KEY (`state_id`)
+    REFERENCES `stampee`.`state` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
@@ -63,29 +82,29 @@ CREATE TABLE IF NOT EXISTS `stampee`.`auction` (
   `name` VARCHAR(45) NOT NULL,
   `description` TEXT NOT NULL,
   `country` VARCHAR(45) NOT NULL,
-  `date_start` DATETIME NOT NULL,
-  `date_end` DATETIME NOT NULL,
+  `date_start` DATE NOT NULL,
+  `date_end` DATE NOT NULL,
   `price` DECIMAL(18,2) NOT NULL,
   `user_id` INT NOT NULL,
-  `state_id` INT NOT NULL,
   `status_id` INT NOT NULL,
+  `stamp_id` INT NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_auction_User1_idx` (`user_id` ASC),
-  INDEX `fk_auction_state1_idx` (`state_id` ASC),
   INDEX `fk_auction_status1_idx` (`status_id` ASC),
+  INDEX `fk_auction_stamp1_idx` (`stamp_id` ASC),
   CONSTRAINT `fk_auction_User1`
     FOREIGN KEY (`user_id`)
     REFERENCES `stampee`.`user` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_auction_state1`
-    FOREIGN KEY (`state_id`)
-    REFERENCES `stampee`.`state` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
   CONSTRAINT `fk_auction_status1`
     FOREIGN KEY (`status_id`)
     REFERENCES `stampee`.`status` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_auction_stamp1`
+    FOREIGN KEY (`stamp_id`)
+    REFERENCES `stampee`.`stamp` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -140,14 +159,39 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `stampee`.`image` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `link` VARCHAR(45) NOT NULL,
-  `main` INT NOT NULL,
-  `auction_id` INT NOT NULL,
+  `link` VARCHAR(255) NOT NULL,
+  `main` INT NULL,
+  `stamp_id` INT NOT NULL,
   PRIMARY KEY (`id`),
-  INDEX `fk_image_auction1_idx` (`auction_id` ASC),
-  CONSTRAINT `fk_image_auction1`
+  INDEX `fk_image_stamp1_idx` (`stamp_id` ASC),
+  CONSTRAINT `fk_image_stamp1`
+    FOREIGN KEY (`stamp_id`)
+    REFERENCES `stampee`.`stamp` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `stampee`.`bid`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `stampee`.`bid` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `price` DECIMAL(18,2) NOT NULL,
+  `date` DATETIME NOT NULL,
+  `auction_id` INT NOT NULL,
+  `user_id` INT NOT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `fk_bid_auction1_idx` (`auction_id` ASC),
+  INDEX `fk_bid_user1_idx` (`user_id` ASC),
+  CONSTRAINT `fk_bid_auction1`
     FOREIGN KEY (`auction_id`)
     REFERENCES `stampee`.`auction` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_bid_user1`
+    FOREIGN KEY (`user_id`)
+    REFERENCES `stampee`.`user` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -167,7 +211,6 @@ INSERT INTO `stampee`.`access` (type) VALUES ('Client');
 INSERT INTO `stampee`.`status` (status) VALUES ('Créé');
 INSERT INTO `stampee`.`status` (status) VALUES ('En cours');
 INSERT INTO `stampee`.`status` (status) VALUES ('Terminé');
-
 
 
 -- -----------------------------------------------------

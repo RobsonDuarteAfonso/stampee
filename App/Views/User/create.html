@@ -5,17 +5,18 @@
 {% block main %}
 
     <main>
-
+        
         <section class="login">
             <h1 class="title">S'Inscrire</h1>
+            {% include 'message.html' %}
             <form action="{{path_root}}public/user/store" method="post">
                 <input type="hidden" name="access_id" value="2">
                 <label for="name">Nom</label>
-                <input type="text" class="rechercher" name="name" id="name" placeholder="Nom" required>                
+                <input type="text" class="rechercher" name="name" id="name" placeholder="Nom" value="{{data.name}}">                
                 <label for="nickname">Utilisateur</label>
-                <input type="email" class="rechercher" name="email" id="email" placeholder="Utilisateur" required>
+                <input type="email" class="rechercher" name="email" id="email" placeholder="Utilisateur" value="{{data.email}}">
                 <label for="password">Mot de passe</label>
-                <input type="password" class="rechercher" name="password" id="password" placeholder="Mot de passe" required>
+                <input type="password" class="rechercher" name="password" id="password" placeholder="Mot de passe">
                 <button type="submit" class="bt bt-md bt-bg-red">
                     <span class="material-icons">send</span>Envoyer
                 </button>

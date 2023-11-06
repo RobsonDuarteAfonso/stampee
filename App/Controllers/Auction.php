@@ -6,39 +6,22 @@ use \Core\View;
 use \Core\RedirectPage;
 use \Core\CheckSession;
 
-/**
- * Home controller
- *
- * PHP version 7.0
- */
+
 class Auction extends \Core\Controller
 {
 
-    /**
-     * Show the index page
-     *
-     * @return void
-     */
     public function indexAction()
     {
         View::renderTemplate('Auction/index.html');
     }
 
-     /**
-     * Show the index page
-     *
-     * @return void
-     */
+
     public function detailsAction()
     {
         View::renderTemplate('Auction/details.html');
     }
 
-         /**
-     * Show the index page
-     *
-     * @return void
-     */
+
     public function createAction()
     {
         CheckSession::sessionAuth();
@@ -48,6 +31,7 @@ class Auction extends \Core\Controller
 
         View::renderTemplate('Auction/create.html',['states'=>$states, 'status'=>$status]);
     }
+
 
     public function storeAction()
     {
@@ -62,11 +46,6 @@ class Auction extends \Core\Controller
     }
 
 
-     /**
-     * Show the index page
-     *
-     * @return void
-     */
     public function myauctionsAction()
     {
         CheckSession::sessionAuth();
@@ -81,7 +60,6 @@ class Auction extends \Core\Controller
         CheckSession::sessionAuth();
 
         $id = $this->route_params['id'];
-
         View::renderTemplate('Auction/addimage.html',['id'=>$id]);
     }
 

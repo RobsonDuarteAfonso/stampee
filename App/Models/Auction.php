@@ -4,18 +4,9 @@ namespace App\Models;
 
 use PDO;
 
-/**
- * Example student model
- *
- * PHP version 7.0
- */
 class Auction extends \Core\Model
 {
-    /**
-     * Get all the students as an associative array
-     *
-     * @return array
-     */
+
     public static function getMyAuctions()
     {
         $db = static::getDB();
@@ -28,23 +19,24 @@ class Auction extends \Core\Model
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    
     public static function getStatus()
     {
         $db = static::getDB();
-
         $stmt = $db->query('SELECT * FROM status');
             
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
+
     public static function getStates()
     {
         $db = static::getDB();
-
         $stmt = $db->query('SELECT * FROM state');
             
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
 
     public static function insert($data)
     {
@@ -52,12 +44,10 @@ class Auction extends \Core\Model
         if ($data) {
 
             $db = static::getDB();
-            
             $fieldsName = implode(", ", array_keys($data));
             $fieldsValue = ":".implode(", :", array_keys($data));
 
             $sql = "INSERT INTO auction ($fieldsName) VALUES ($fieldsValue)";
-
             $stmt = $db->prepare($sql);
 
             foreach($data as $key=>$value) {
@@ -79,11 +69,9 @@ class Auction extends \Core\Model
         if ($id) {
 
             $db = static::getDB();
-            
             $sql = "INSERT INTO image (auction_id) VALUES (:id)";
 
             $stmt = $db->prepare($sql);
-
             $stmt->bindValue(":id", $id);
         }
         
