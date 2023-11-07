@@ -8,8 +8,9 @@
 @import url(form/input.css);
 
 /* Pages */
-@import url(pages/createauction.css);
-@import url(pages/myauctions.css);
+@import url(pages/myspace.css);
+@import url(pages/create.css);
+@import url(pages/index.css);
 @import url(pages/login.css);
 @import url(pages/catalog.css);
 @import url(pages/details.css);

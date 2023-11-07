@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use \Core\View;
 use \Core\RedirectPage;
+use \Core\CheckSession;
 use \Core\Messages;
 use \Core\Validation;
 
@@ -125,6 +126,13 @@ class User extends \Core\Controller
 
         session_destroy();
         RedirectPage::redirect('user/login');
-    }    
- 
+    }
+
+
+    public function mySpaceAction()
+    {
+        CheckSession::sessionAuth();
+        
+        View::renderTemplate('user/myspace.html');
+    }
 }

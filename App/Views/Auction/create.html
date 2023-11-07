@@ -8,27 +8,28 @@
 
         <section class="create_auction">
             <h1 class="title">Ajouter une Enchère</h1>
+            {% include 'message.html' %}
             <form action="{{path_root}}public/auction/store" method="post">
                 <input type="hidden" name="user_id" value="{{ session.user_id }}">
                 <input type="hidden" name="status_id" value="1">
                 
                 <label for="name">Titre</label>
-                <input type="text" class="rechercher" name="name" id="name" placeholder="Titre" required>
+                <input type="text" class="input_default" name="name" id="name" placeholder="Titre" required>
 
                 <label for="description">Description</label>
                 <textarea name="description" id="description" cols="30" rows="10" required></textarea>
 
                 <label for="country">Pays</label>
-                <input type="text" class="rechercher" name="country" id="country" placeholder="Pays" required>
+                <input type="text" class="input_default" name="country" id="country" placeholder="Pays" required>
 
                 <label for="price">Prix</label>
-                <input type="text" class="rechercher" name="price" id="price" placeholder="Prix" required>
+                <input type="text" class="input_default" name="price" id="price" placeholder="Prix" required>
 
                 <label for="date_start">Date Initiale</label>
-                <input type="date" class="rechercher" name="date_start" id="date_start" placeholder="Date Initiale" required>                
+                <input type="date" class="input_default" name="date_start" id="date_start" placeholder="Date Initiale" required>                
 
                 <label for="date_end">Date Finale</label>
-                <input type="date" class="rechercher" name="date_end" id="date_end" placeholder="Date Finale" required>
+                <input type="date" class="input_default" name="date_end" id="date_end" placeholder="Date Finale" required>
 
                 <label for="state">State</label>
                 <select name="state_id" id="state" required>

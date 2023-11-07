@@ -6,15 +6,43 @@
 
     <main>
 
-        <section class="login">
+        <section class="myspace">
+
             <h1 class="title">Mon Espace</h1>
-            <ul>
-                <li>Changer le Mot de Passe</li>
-                <li>Mes Timbres</li>
-                <li>Mes Enchères</li>
-                <li>Mes Favoris</li>
-            </ul>
-        </header>
+
+            <div class="myspase_list">
+
+                <a href="#" class="bt bt-md bt-bg-red">
+                    <div class="myspace_itens">
+                        <i class="material-icons md-36">lock_reset</i>
+                        <span>Changer le Mot de Passe</span>
+                    </div>
+                </a>
+
+                <a href="{{path_root}}public/stamp/index" class="bt bt-md bt-bg-red">
+                    <div class="myspace_itens">
+                        <i class="material-icons md-36">select_all</i>
+                        <span>Mes Timbres</span>                
+                    </div>
+                </a>
+
+                <a href="{{path_root}}public/auction/myauctions" class="bt bt-md bt-bg-red">
+                    <div class="myspace_itens">
+                        <i class="material-icons md-36">gavel</i>
+                        <span>Mes Enchères</span>                
+                    </div>
+                </a>
+
+                <a href="#" class="bt bt-md bt-bg-red">
+                    <div class="myspace_itens">
+                        <i class="material-icons md-36">favorite</i>
+                        <span>Mes Favoris</span>                
+                    </div>
+                </a>
+
+            </div>
+
+        </section>
 
     </main>
 

@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block title %}Mes Timbres{% endblock %}
+
+{% block main %}
+
+    <main>
+
+        <section class="index_list">
+            <h1 class="title">Mes Timbres</h1>
+            <table>
+                <tr class="index_list-title">
+                    <th>image</th>
+                    <th>#</th>
+                    <th>name</th>
+                    <th>description</th>
+                    <th>country</th>
+                    <th>states</th>
+                    <th colspan="3">                
+                        <a href="{{path_root}}public/stamp/create" class="bt bt-md bt-bg-red">
+                            <span class="material-icons">add_circle</span>Ajouter
+                        </a>
+                    </th>
+                </tr>
+                {% if stamps|length > 0 %}
+                    {% for stamp in stamps %}
+                        <tr class="index_list-datas">
+                            <td><img src="{{path_root}}public/assets/img/no-image.png" alt="no-image"></td>
+                            <td>{{ stamp.id }}</td>
+                            <td>{{ stamp.title }}</td>
+                            <td>{{ stamp.description }}</td>
+                            <td>{{ stamp.name }} ({{ stamp.iso }})</td>
+                            <td>{{ stamp.state }}</td>
+                            <td>
+                                <a href="{{path_root}}public/stamp/addimage/{{ stamp.id }}" class="bt bt-md2 bt-bd-gray"><i class="material-icons">add_photo_alternate</i></a>
+                            </td>
+                            <td>
+                                <a href="{{path_root}}public/stamp/edit" class="bt bt-md2 bt-bd-gray"><i class="material-icons">edit_square</i></a>
+                            </td>
+                            <td>
+                                <form action="{{path_root}}public/stamp/delete" method="post">
+                                    <button type="submit" class="bt bt-md2 bt-bd-gray"><i class="material-icons">remove_circle</i></button>
+                                </form>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                {% else %}
+                <tr>
+                    <td class="no_date" colspan="10">Il n'y a aucune donnée à afficher.</td>
+                </tr>
+                {% endif %}
+            </table>
+        </header>
+
+    </main>
+
+{% endblock %}

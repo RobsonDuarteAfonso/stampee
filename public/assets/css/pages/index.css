@@ -1,4 +1,4 @@
-.my_auctions {
+.index_list {
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -6,16 +6,21 @@
     height: 59vh;
 }
 
-.my_auctions h1 {
+.index_list h1 {
     margin-bottom: var(--space-md);
 }
 
-.my_actions-title th {
+.index_list-title th {
     color: var(--white);
     background-color: var(--gray-500);
 }
 
-.my_actions-datas td {
+.index_list-datas td {
 text-align: center;
 }
 
+.no_date{
+    text-align: center;
+    padding: 20px 0;
+    font-weight: bold;
+}

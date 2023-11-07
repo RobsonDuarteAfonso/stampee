@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block title %}Ajouter un Timbre{% endblock %}
+
+{% block main %}
+
+    <main>
+
+        <section class="create">
+            <h1 class="title">Ajouter un Timbre</h1>
+            {% include 'message.html' %}
+            <form action="{{path_root}}public/stamp/store" method="post">
+                <input type="hidden" name="user_id" value="{{ session.user_id }}">
+                
+                <label for="title">Titre</label>
+                <input type="text" class="input_default" name="title" id="title" placeholder="Titre" value="{{data.title}}">
+
+                <label for="description">Description</label>
+                <textarea name="description" id="description" cols="30" rows="10">{{data.description}}</textarea>
+
+                <label for="country">Pays</label>
+                <select name="country_id" id="country" class="select_default">
+                    <option value="">Sélectionner</option>
+                    {% if countries|length > 0 %}
+                        {% for item in countries %}
+                            
+                            <option value="{{ item.id }}" 
+                            {% if data|length > 0 %} 
+                                {% if data.country_id == item.id %} selected {% endif %}
+                            {% endif %}
+                            >
+                            {{ item.name }} ({{ item.iso }})
+                            </option>
+                        {% endfor %}
+                    {% endif %}
+                </select>
+
+                <label for="state">State</label>
+                <select name="state_id" id="state" class="select_default">
+                    <option value="">Sélectionner</option>
+                    {% if states|length > 0 %}
+                        {% for item in states %}
+                            <option value="{{ item.id }}"
+                            {% if data|length > 0 %} 
+                                {% if data.state_id == item.id %} selected {% endif %}
+                            {% endif %}
+                            >
+                            {{ item.state }}
+                            </option>
+                        {% endfor %}
+                    {% endif %}
+                </select>
+
+                <button type="submit" class="bt bt-md bt-bg-red">
+                    <span class="material-icons">send</span>Envoyer
+                </button>
+            </form>
+        </header>
+
+    </main>
+
+{% endblock %}

@@ -6,11 +6,11 @@
 
     <main>
 
-        <section class="create_auction">
-            <h1 class="title">Ajouter des Images - Lot #{{id}}</h1>
+        <section class="index_list">
+            <h1 class="title">Ajouter des Images - #{{id}}</h1>
             <form action="{{path_root}}public/auction/upload" method="post" enctype="multipart/form-data">
 
-                <input type="hidden" name="auction_id" value="{{id}}">
+                <input type="hidden" name="id" value="{{id}}">
                 
                 <label for="images">Téléchargement d'images</label>
                 <input type="file" name="images[]" id="images" multiple accept="image/*" required>

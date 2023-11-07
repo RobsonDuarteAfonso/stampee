@@ -42,7 +42,6 @@ class User extends \Core\Model
                 }
                 
                 $stmt->execute();
-                
                 return $db->lastInsertId();
             }
 

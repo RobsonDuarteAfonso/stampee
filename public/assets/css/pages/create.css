@@ -1,29 +1,29 @@
-.create_auction {
+.create {
     display: flex;
     flex-direction: column;
     width: 100%;
     padding: var(--space-md);
 }
 
-.create_auction h1 {
+.create h1 {
     margin-bottom: var(--space-md);
 }
 
-.create_auction form {
+.create form {
     display: flex;
     flex-direction: column;
 }
 
-.create_auction button {
+.create button {
     width: 200px;
 }
 
-.create_auction label {
+.create label {
     font-weight: bold;
     margin-bottom: 10px;
 }
 
-.create_auction input, select {
+.create input, select {
     margin-bottom: 20px;
 }
 

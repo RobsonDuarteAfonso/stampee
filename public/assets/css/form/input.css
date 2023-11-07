@@ -1,7 +1,11 @@
 
-.rechercher {
+.input_default {
     height: var(--space-lg);
     width: 300px;
     padding: 0 var(--space-sm);
     color: var(--gray-500);
+}
+
+.select_default {
+    width: 300px;
 }

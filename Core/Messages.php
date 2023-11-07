@@ -8,16 +8,20 @@ namespace Core;
 
             switch ($type) {
                 case 'userSuccess':
-                    return "Utilisateur créé avec succès!";
+                    return "Utilisateur créé avec succès !";
                     break;
 
                 case 'notMethodPost':
-                    return "Méthode d'envoi de données incorrecte. Veuillez utiliser le formulaire!";
+                    return "Méthode d'envoi de données incorrecte. Veuillez utiliser le formulaire !";
                     break;
 
                 case 'invalidUsernamePassword':
-                    return "Nom d'utilisateur ou mot de passe invalide!";
+                    return "Nom d'utilisateur ou mot de passe invalide !";
                     break;
+
+                case 'invalidAccessStamp':
+                    return "Vous essayez d'accéder à un timbre qui ne vous appartient pas !";
+                    break;                    
             }
         }
     }
