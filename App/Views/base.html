@@ -23,7 +23,7 @@
                 <button type="submit" class="bt bt-x2 bt-bg-red"><i class="material-icons">search</i></button>
             </form>
             <aside>
-                {% if session|length > 0 %}
+                {% if session.user_id is not null %}
                     <div class="name_user">
                         <span class="material-icons">person</span>
                         <span class="name_user-text">{{ session.user_nom }}</span>

@@ -1,6 +1,6 @@
 
 .header-hero-home {
-    min-height: 59.3vh;
+    min-height: 575px;
     background-image: url("../../img/home.jpg");
     background-color: var(--black);
     display: flex;

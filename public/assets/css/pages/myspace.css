@@ -4,7 +4,7 @@
     align-items: center;
     width: 100%;
     padding: var(--space-md);
-    height: 59vh;
+    min-height: 575px;
 }
 
 .myspace h1 {

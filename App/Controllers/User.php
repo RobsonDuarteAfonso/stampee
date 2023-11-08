@@ -30,7 +30,7 @@ class User extends \Core\Controller
             if (!empty($_POST)) {
 
                 $val = new \Core\Validation();
-                $val->name('Nom')->value($_POST['name'])->max(45)->min(2)->pattern('words')->required();
+                $val->name('Nom')->value($_POST['name'])->max(45)->min(2)->pattern('alphanum2')->required();
                 $val->name('Utilisateur')->value($_POST['email'])->pattern('email')->required()->max(45);
                 $val->name('Mot de Passe')->value($_POST['password'])->pattern('alphanum')->required()->min(6)->max(20);
 
@@ -48,25 +48,29 @@ class User extends \Core\Controller
                         $hashPassword= password_hash($_POST['password'], PASSWORD_BCRYPT, $options);
                         $_POST['password'] = $hashPassword;
 
-                        $inserted = \App\Models\User::insert($_POST3);
-                        $message = Messages::getMessage("userSuccess");
-                        View::renderTemplate('user/login.html', ['message'=>$message, 'data'=>$_POST]);
-                        exit();
+                        $inserted = \App\Models\User::insert($_POST);
+
+                        $_SESSION['success'] = Messages::getMessage("createdSuccess", "Utilisateur");
+                        RedirectPage::redirect('user/login');
+                        
                     } else {
-                        $errors = $val->getErrors();
-                        View::renderTemplate('user/create.html', ['errors'=>$errors, 'data'=>$_POST]);
+
+                        $_SESSION['error'] = $val->getErrors();
+                        View::renderTemplate('user/create.html', ['data'=>$_POST]);
                     }
 
                 } else {
-                    $errors = $val->getErrors();
-                    View::renderTemplate('user/create.html', ['errors'=>$errors, 'data'=>$_POST]);
+
+                    $_SESSION['error'] = $val->getErrors();
+                    View::renderTemplate('user/create.html', ['data'=>$_POST]);
                 } 
             }
 
         } catch (Exception $ex) {
             $erros = array();
             $errors[] = $ex->getMessage();
-            View::renderTemplate('user/create.html', ['errors'=>$errors]);
+            $_SESSION['error'] = $errors;
+            View::renderTemplate('user/create.html', ['data'=>$_POST]);
         }
     }
 
@@ -83,11 +87,9 @@ class User extends \Core\Controller
 
             if ($_SERVER["REQUEST_METHOD"] != "POST") {
 
-                $message = Messages::getMessage("notMethodPost");
-                $erros = array();
-                $errors[] = $message;
+                $_SESSION['error'] = Messages::getMessage("notMethodPost");
 
-                View::renderTemplate('user/login.html', ['errors'=>$errors]);              
+                RedirectPage::redirect('user/login');              
             }
 
             $val = new \Core\Validation();
@@ -99,25 +101,25 @@ class User extends \Core\Controller
                 $checked = \App\Models\User::checkUser($_POST);
 
                 if ($checked) {
-                    RedirectPage::redirect("home/index");
+                    RedirectPage::redirect("user/myspace");
 
                 } else {
-                    $message = Messages::getMessage("invalidUsernamePassword");
-                    $erros = array();
-                    $errors[] = $message;
-                    
-                    View::renderTemplate('user/login.html', ['errors'=>$errors]);  
+
+                    $_SESSION['error'] = Messages::getMessage("invalidUsernamePassword");
+                    RedirectPage::redirect('user/login');  
                 }
 
             } else {
-                $errors = $val->getErrors();
-                View::renderTemplate('user/login.html', ['errors'=>$errors]);
+                
+                $_SESSION['error'] = $val->getErrors();
+                RedirectPage::redirect('user/login');
             }
 
         } catch (Exception $ex) {
             $erros = array();
             $errors[] = $ex->getMessage();
-            View::renderTemplate('user/login.html', ['errors'=>$errors]);
+            $_SESSION['error'] = $errors;
+            RedirectPage::redirect('user/login');
         }
     } 
 

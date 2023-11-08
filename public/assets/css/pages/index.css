@@ -3,24 +3,30 @@
     flex-direction: column;
     width: 100%;
     padding: var(--space-md);
-    height: 59vh;
+    min-height: 575px;
 }
 
 .index_list h1 {
     margin-bottom: var(--space-md);
 }
 
-.index_list-title th {
+.index_list-title th:not(:last-of-type) {
     color: var(--white);
     background-color: var(--gray-500);
+    padding: 0 5px;
 }
 
 .index_list-datas td {
-text-align: center;
+    text-align: center;
 }
 
-.no_date{
+.no_date {
     text-align: center;
     padding: 20px 0;
     font-weight: bold;
+}
+
+.index_list-datas > td > img {
+    width: 42px;
+    height: 54px;
 }

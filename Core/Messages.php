@@ -4,12 +4,20 @@ namespace Core;
 
     class Messages {
 
-         public static function getMessage($type) {
+         public static function getMessage($type, $extra = null) {
 
             switch ($type) {
-                case 'userSuccess':
-                    return "Utilisateur créé avec succès !";
+                case 'createdSuccess':
+                    return "$extra créé avec succès !";
                     break;
+
+                case 'updatedSuccess':
+                    return "$extra modifié avec succès !";
+                    break;                    
+
+                case 'uploadSuccess':
+                    return "Le téléversement de l'image s'est terminé avec succès !";
+                    break;                    
 
                 case 'notMethodPost':
                     return "Méthode d'envoi de données incorrecte. Veuillez utiliser le formulaire !";
@@ -21,7 +29,15 @@ namespace Core;
 
                 case 'invalidAccessStamp':
                     return "Vous essayez d'accéder à un timbre qui ne vous appartient pas !";
-                    break;                    
+                    break;
+
+                case 'invalidTypeImage':
+                    return "Type de fichier non valide pour le téléchargement, uniquement autorisé : jpg, jpeg, png et gif.";
+                    break;
+
+                case 'uploadError':
+                    return "Erreur lors du téléchargement de fichiers";
+                    break;
             }
         }
     }

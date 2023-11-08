@@ -1,5 +1,5 @@
 .msg_error {
-    padding: 10px 40px;
+    padding: 10px;
     margin-bottom: 10px;
     background-color: #ffb2b2;
     color: #e30613;;
@@ -10,8 +10,8 @@
 .msg_success {
     padding: 10px;
     margin-bottom: 10px;
-    background-color: #b5fdc3;
-    color: rgb(0, 193, 29);;
+    background-color: #83e096;
+    color: rgb(12, 132, 30);;
     border: 1px solid #038e11;
     font-weight: bold;
 }

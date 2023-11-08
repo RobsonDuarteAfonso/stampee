@@ -8,6 +8,7 @@
 @import url(form/input.css);
 
 /* Pages */
+@import url(pages/addimage.css);
 @import url(pages/myspace.css);
 @import url(pages/create.css);
 @import url(pages/index.css);

@@ -183,7 +183,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `stampee`.`image` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `link` VARCHAR(255) NOT NULL,
+  `file_name` VARCHAR(255) NOT NULL,
   `main` INT NULL,
   `stamp_id` INT NOT NULL,
   PRIMARY KEY (`id`),

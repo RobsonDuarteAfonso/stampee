@@ -6,21 +6,41 @@
 
     <main>
 
-        <section class="index_list">
-            <h1 class="title">Ajouter des Images - #{{id}}</h1>
-            <form action="{{path_root}}public/auction/upload" method="post" enctype="multipart/form-data">
+        <div class="index_list">
+            <section class="index_list-form">
+                <h1 class="title">Ajouter des Images - Timbre #{{id}}</h1>
+                {% include 'message.html' %}
+                <form action="{{path_root}}public/stamp/upload" method="post" enctype="multipart/form-data">
 
-                <input type="hidden" name="id" value="{{id}}">
-                
-                <label for="images">Téléchargement d'images</label>
-                <input type="file" name="images[]" id="images" multiple accept="image/*" required>
+                    <input type="hidden" name="stamp_id" value="{{id}}">
+                    
+                    <label for="images">Téléchargement d'images</label>
+                    <input type="file" name="images[]" id="images" multiple accept="image/*" required>
 
-                <button type="submit" class="bt bt-md bt-bg-red">
-                    <span class="material-icons">send</span>Envoyer
-                </button>
-            </form>
-        </header>
+                    <div class="upload_buttons">
+                        <button type="submit" class="bt bt-md bt-bg-red">
+                            <span class="material-icons">file_upload</span>Téléverser
+                        </button>
+                        <a href="{{path_root}}public/stamp/index" class="bt bt-md2 bt-bd-gray mes_timbres">
+                            <i class="material-icons">select_all</i>Mes Timbres
+                        </a>
+                    </div>
+                </form>
+            </section>
 
+            <section class="index_list-images">
+                <h1 class="title">Images</h1>
+                <div>
+                    {% if images|length > 0 %}
+                        {% for image in images %}
+                            <img src="{{path_root}}public/assets/stamp/{{id}}/{{image.file_name}}" alt="stamp">
+                        {% endfor %}
+                    {% else %}
+                        <p class="no_date" colspan="10">Il n'y a aucune donnée à afficher.</p>
+                    {% endif %}                
+                </div>
+            </section>        
+        </div>
     </main>
 
 {% endblock %}

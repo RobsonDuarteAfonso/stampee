@@ -13,9 +13,8 @@ use \Core\RedirectPage;
                 return true;
             
             } else {
-                RedirectPage::redirect('login/index');
+                RedirectPage::redirect('user/login');
             }
         }
     }
-
 ?>

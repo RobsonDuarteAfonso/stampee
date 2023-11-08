@@ -15,6 +15,11 @@ class Config
     const URL_ROOT = "http://localhost/stampee/";
 
     /**
+     * Path Upload
+     */
+    const PATH_UPLOAD = __DIR__;   
+
+    /**
      * Database host
      * @var string
      */

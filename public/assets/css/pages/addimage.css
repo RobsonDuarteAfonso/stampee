@@ -1,0 +1,25 @@
+.index_list-form {
+    margin-bottom: var(--space-x2);
+}
+
+.index_list-images {
+    display: flex;
+    flex-direction: column;
+}
+
+.index_list-images img {
+    width: 200px;
+    height: 300px;
+    margin: var(--space-xs) var(--space-xs);
+}
+
+.mes_timbres {
+    width: 200px;
+}
+
+.upload_buttons {
+    margin-top: var(--space-lg);
+    width: 400px;
+    display: flex;
+    justify-content: space-between;
+}

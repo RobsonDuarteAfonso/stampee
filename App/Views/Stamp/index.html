@@ -8,6 +8,7 @@
 
         <section class="index_list">
             <h1 class="title">Mes Timbres</h1>
+            {% include 'message.html' %}
             <table>
                 <tr class="index_list-title">
                     <th>image</th>
@@ -25,7 +26,11 @@
                 {% if stamps|length > 0 %}
                     {% for stamp in stamps %}
                         <tr class="index_list-datas">
-                            <td><img src="{{path_root}}public/assets/img/no-image.png" alt="no-image"></td>
+                            {% if stamp.file_name == null %}
+                                <td><img src="{{path_root}}public/assets/img/no-image.png" alt="stamp"></td>
+                            {% else %}
+                                <td><img src="{{path_root}}public/assets/stamp/{{stamp.id}}/{{stamp.file_name}}" alt="stamp"></td>
+                            {% endif %}
                             <td>{{ stamp.id }}</td>
                             <td>{{ stamp.title }}</td>
                             <td>{{ stamp.description }}</td>
@@ -35,7 +40,7 @@
                                 <a href="{{path_root}}public/stamp/addimage/{{ stamp.id }}" class="bt bt-md2 bt-bd-gray"><i class="material-icons">add_photo_alternate</i></a>
                             </td>
                             <td>
-                                <a href="{{path_root}}public/stamp/edit" class="bt bt-md2 bt-bd-gray"><i class="material-icons">edit_square</i></a>
+                                <a href="{{path_root}}public/stamp/edit/{{ stamp.id }}" class="bt bt-md2 bt-bd-gray"><i class="material-icons">edit_square</i></a>
                             </td>
                             <td>
                                 <form action="{{path_root}}public/stamp/delete" method="post">
@@ -50,7 +55,7 @@
                 </tr>
                 {% endif %}
             </table>
-        </header>
+        </section>
 
     </main>
 
