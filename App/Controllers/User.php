@@ -50,27 +50,27 @@ class User extends \Core\Controller
 
                         $inserted = \App\Models\User::insert($_POST);
 
-                        $_SESSION['success'] = Messages::getMessage("createdSuccess", "Utilisateur");
-                        RedirectPage::redirect('user/login');
+                        $message = Messages::getMessage("createdSuccess", "Utilisateur");
+                        View::renderTemplate('user/login.html', ['message'=>$message]);
                         
                     } else {
 
-                        $_SESSION['error'] = $val->getErrors();
-                        View::renderTemplate('user/create.html', ['data'=>$_POST]);
+                        $errors = $val->getErrors();
+                        View::renderTemplate('user/create.html', ['data'=>$_POST, 'errors'=>$errors]);
                     }
 
                 } else {
 
-                    $_SESSION['error'] = $val->getErrors();
-                    View::renderTemplate('user/create.html', ['data'=>$_POST]);
+                    $errors = $val->getErrors();
+                    View::renderTemplate('user/create.html', ['data'=>$_POST, 'errors'=>$errors]);
                 } 
             }
 
         } catch (Exception $ex) {
             $erros = array();
             $errors[] = $ex->getMessage();
-            $_SESSION['error'] = $errors;
-            View::renderTemplate('user/create.html', ['data'=>$_POST]);
+
+            View::renderTemplate('user/create.html', ['data'=>$_POST, 'errors'=>$errors]);
         }
     }
 
@@ -87,9 +87,9 @@ class User extends \Core\Controller
 
             if ($_SERVER["REQUEST_METHOD"] != "POST") {
 
-                $_SESSION['error'] = Messages::getMessage("notMethodPost");
+                $errors = Messages::getMessage("notMethodPost");
 
-                RedirectPage::redirect('user/login');              
+                View::renderTemplate('user/login.html', ['errors'=>$errors]);
             }
 
             $val = new \Core\Validation();
@@ -105,21 +105,21 @@ class User extends \Core\Controller
 
                 } else {
 
-                    $_SESSION['error'] = Messages::getMessage("invalidUsernamePassword");
-                    RedirectPage::redirect('user/login');  
+                    $errors = Messages::getMessage("invalidUsernamePassword");
+                    View::renderTemplate('user/login.html', ['errors'=>$errors]);  
                 }
 
             } else {
                 
-                $_SESSION['error'] = $val->getErrors();
-                RedirectPage::redirect('user/login');
+                $errors = $val->getErrors();
+                View::renderTemplate('user/login.html', ['errors'=>$errors]);
             }
 
         } catch (Exception $ex) {
             $erros = array();
             $errors[] = $ex->getMessage();
-            $_SESSION['error'] = $errors;
-            RedirectPage::redirect('user/login');
+
+            View::renderTemplate('user/login.html', ['errors'=>$errors]);
         }
     } 
 

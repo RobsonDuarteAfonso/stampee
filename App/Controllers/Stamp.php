@@ -26,9 +26,8 @@ class Stamp extends \Core\Controller
         } catch (Exception $ex) {
             $erros = array();
             $errors[] = $ex->getMessage();
-            $_SESSION['error'] = $errors;
 
-            RedirectPage::redirect('user/myspace');
+            View::renderTemplate('user/myspace.html', ['errors'=>$errors]);
         }
     }
 
@@ -53,9 +52,10 @@ class Stamp extends \Core\Controller
         } catch (Exception $ex) {
             $erros = array();
             $errors[] = $ex->getMessage();
-            $_SESSION['error'] = $errors;
 
-            RedirectPage::redirect('stamp/index');
+            $liste = \App\Models\Stamp::getMyStamps();
+
+            View::renderTemplate('stamp/index.html', ['errors'=>$errors, 'stamps'=>$liste]);
         }
     }
 
@@ -73,24 +73,113 @@ class Stamp extends \Core\Controller
                 $states = \App\Models\stamp::getStates();
                 $countries = \App\Models\stamp::getCountries();
 
-                $liste = \App\Models\stamp::getStampForId($id);
+                $stamp = \App\Models\stamp::getStampForId($id);
 
-                View::renderTemplate('stamp/edit.html',['data'=>$liste, 'states'=>$states, 'countries'=>$countries]);
+                View::renderTemplate('stamp/edit.html',['data'=>$stamp, 'states'=>$states, 'countries'=>$countries]);
 
             } else {
 
-                $_SESSION['error'] = Messages::getMessage("invalidAccessStamp");
-                
-                RedirectPage::redirect('stamp/index'); 
+                $errors = Messages::getMessage("invalidAccessStamp");
+
+                $liste = \App\Models\Stamp::getMyStamps();
+
+                View::renderTemplate('stamp/index.html', ['errors'=>$errors, 'stamps'=>$liste]);
             }
 
         } catch (Exception $ex) {
             $erros = array();
             $errors[] = $ex->getMessage();
-            $_SESSION['error'] = $errors;
                 
-            RedirectPage::redirect('stamp/index'); 
+            $liste = \App\Models\Stamp::getMyStamps();
+
+            View::renderTemplate('stamp/index.html', ['errors'=>$errors, 'stamps'=>$liste]); 
         }
+    }
+
+
+    public function confirmAction()
+    {
+        try {
+            
+            CheckSession::sessionAuth();
+
+            $id = $_POST['id'];
+
+            if (\App\Models\Stamp::checkStampUser($id)) {
+            
+                $states = \App\Models\stamp::getStates();
+                $countries = \App\Models\stamp::getCountries();
+
+                $stamp = \App\Models\stamp::getStampForId($id);
+
+                View::renderTemplate('stamp/confirm.html',['data'=>$stamp, 'states'=>$states, 'countries'=>$countries]);
+
+            } else {
+
+                $errors = Messages::getMessage("invalidAccessStamp");
+
+                $liste = \App\Models\Stamp::getMyStamps();
+
+                View::renderTemplate('stamp/index.html', ['errors'=>$errors, 'stamps'=>$liste]);
+            }
+
+        } catch (Exception $ex) {
+            $erros = array();
+            $errors[] = $ex->getMessage();
+                
+            $liste = \App\Models\Stamp::getMyStamps();
+
+            View::renderTemplate('stamp/index.html', ['errors'=>$errors, 'stamps'=>$liste]); 
+        }
+    }     
+
+
+    public function deleteAction()
+    {
+        try {
+
+            if (!empty($_POST)) {
+
+                $deleted = \App\Models\Stamp::delete($_POST['id']);
+
+                if ($deleted) {
+
+                    $this->deleteDirectory($this->pathBase(). $_POST['id']);
+
+                    $message = Messages::getMessage("deletedSuccess", "Timbre");
+                    $liste = \App\Models\Stamp::getMyStamps();
+
+                    View::renderTemplate('stamp/index.html', ['message'=>$message, 'stamps'=>$liste]);
+
+                } else {
+
+                    $errors = Messages::getMessage("deletedError");
+
+                    $liste = \App\Models\Stamp::getMyStamps();
+    
+                    View::renderTemplate('stamp/index.html', ['errors'=>$errors, 'stamps'=>$liste]);
+
+                }
+
+            } else {
+
+                    $errors = $val->getErrors();
+
+                    $states = \App\Models\stamp::getStates();
+                    $countries = \App\Models\stamp::getCountries();
+
+                    View::renderTemplate('stamp/confirm.html', ['errors'=>$errors, 'data'=>$_POST, 'states'=>$states, 'countries'=>$countries]);
+            } 
+
+        } catch (Exception $ex) {
+            $erros = array();
+            $errors[] = $ex->getMessage();
+
+            $states = \App\Models\stamp::getStates();
+            $countries = \App\Models\stamp::getCountries();
+
+            View::renderTemplate('stamp/confirm.html', ['errors'=>$errors, 'data'=>$_POST, 'states'=>$states, 'countries'=>$countries]);
+        }        
     }    
 
 
@@ -109,30 +198,31 @@ class Stamp extends \Core\Controller
                 if($val->isSuccess()){
 
                     $inserted = \App\Models\Stamp::insert($_POST);
-                    $_SESSION['success'] = Messages::getMessage("createdSuccess", "Timbre");
+                    $message = Messages::getMessage("createdSuccess", "Timbre");
 
-                    RedirectPage::redirect("stamp/index");
+                    $liste = \App\Models\Stamp::getMyStamps();
+
+                    View::renderTemplate('stamp/index.html', ['message'=>$message, 'stamps'=>$liste]);
 
                 } else {
 
-                    $_SESSION['error'] = $val->getErrors();
+                    $errors = $val->getErrors();
 
                     $states = \App\Models\stamp::getStates();
                     $countries = \App\Models\stamp::getCountries();
 
-                    View::renderTemplate('stamp/create.html', ['data'=>$_POST, 'states'=>$states, 'countries'=>$countries]);
+                    View::renderTemplate('stamp/create.html', ['errors'=>$errors, 'data'=>$_POST, 'states'=>$states, 'countries'=>$countries]);
                 } 
             }
 
         } catch (Exception $ex) {
             $erros = array();
             $errors[] = $ex->getMessage();
-            $_SESSION['error'] = $errors;
 
             $states = \App\Models\stamp::getStates();
             $countries = \App\Models\stamp::getCountries();
 
-            View::renderTemplate('stamp/create.html', ['data'=>$_POST, 'states'=>$states, 'countries'=>$countries]);
+            View::renderTemplate('stamp/create.html', ['errors'=>$errors, 'data'=>$_POST, 'states'=>$states, 'countries'=>$countries]);
         }        
     }
 
@@ -152,30 +242,31 @@ class Stamp extends \Core\Controller
                 if($val->isSuccess()){
 
                     \App\Models\Stamp::update($_POST);
-                    $_SESSION['success'] = Messages::getMessage("updatedSuccess", "Timbre");
+                    $message = Messages::getMessage("updatedSuccess", "Timbre");
 
-                    RedirectPage::redirect("stamp/index");
+                    $liste = \App\Models\Stamp::getMyStamps();
+
+                    View::renderTemplate('stamp/index.html', ['message'=>$message, 'stamps'=>$liste]);
 
                 } else {
 
-                    $_SESSION['error'] = $val->getErrors();
+                    $errors = $val->getErrors();
 
                     $states = \App\Models\stamp::getStates();
                     $countries = \App\Models\stamp::getCountries();
 
-                    View::renderTemplate('stamp/edit.html', ['data'=>$_POST, 'states'=>$states, 'countries'=>$countries]);
+                    View::renderTemplate('stamp/edit.html', ['errors'=>$errors, 'data'=>$_POST, 'states'=>$states, 'countries'=>$countries]);
                 } 
             }
 
         } catch (Exception $ex) {
             $erros = array();
             $errors[] = $ex->getMessage();
-            $_SESSION['error'] = $errors;
             
             $states = \App\Models\stamp::getStates();
             $countries = \App\Models\stamp::getCountries();
 
-            View::renderTemplate('stamp/edit.html', ['data'=>$_POST, 'states'=>$states, 'countries'=>$countries]);
+            View::renderTemplate('stamp/edit.html', ['errors'=>$errors, 'data'=>$_POST, 'states'=>$states, 'countries'=>$countries]);
         }        
     }    
 
@@ -195,17 +286,20 @@ class Stamp extends \Core\Controller
             
             } else {
 
-                $_SESSION['error'] = Messages::getMessage("invalidAccessStamp");
+                $errors = Messages::getMessage("invalidAccessStamp");
                 
-                RedirectPage::redirect('stamp/index'); 
+                $liste = \App\Models\Stamp::getMyStamps();
+
+                View::renderTemplate('stamp/index.html', ['errors'=>$errors, 'stamps'=>$liste]); 
             }
 
         } catch (Exception $ex) {
             $erros = array();
             $errors[] = $ex->getMessage();
-            $_SESSION['error'] = $errors;
                 
-            RedirectPage::redirect('stamp/index'); 
+            $liste = \App\Models\Stamp::getMyStamps();
+
+            View::renderTemplate('stamp/index.html', ['errors'=>$errors, 'stamps'=>$liste]); 
         } 
     }
 
@@ -219,12 +313,8 @@ class Stamp extends \Core\Controller
             if(isset($_POST)) {
 
                 $stamp_id = $_POST['stamp_id'];
-                $fold_base = Config::PATH_UPLOAD;
-                $substring = "stampee";
-                $position = strpos($fold_base, $substring);
-                $path_upload = substr($fold_base, 0, $position + strlen($substring));
 
-                $folder_destination = $path_upload."\public\assets\stamp\\". $stamp_id;
+                $folder_destination = $this->pathBase(). $stamp_id;
 
                 if (!is_dir($folder_destination)) {
                     mkdir($folder_destination, 0755, true);
@@ -254,7 +344,6 @@ class Stamp extends \Core\Controller
                 
                             if (move_uploaded_file($file_temporary, $path_destination)) {
 
-                                $_SESSION['success'] = Messages::getMessage("uploadSuccess");
                                 RedirectPage::Redirect('stamp/addimage/'.$stamp_id);
 
                             } else {
@@ -279,9 +368,42 @@ class Stamp extends \Core\Controller
         } catch (Exception $ex) {
             $erros = array();
             $errors[] = $ex->getMessage();
-            $_SESSION['error'] = $errors;
                 
-            RedirectPage::Redirect('stamp/index'); 
+            $liste = \App\Models\Stamp::getMyStamps();
+
+            View::renderTemplate('stamp/index.html', ['errors'=>$errors, 'stamps'=>$liste]);
         } 
-    }  
+    }
+
+
+    function deleteDirectory($dir) {
+
+        if (!is_dir($dir)) {
+            return false;
+        }
+    
+        $files = array_diff(scandir($dir), array('.', '..'));
+    
+        foreach ($files as $file) {
+            $path = $dir . '/' . $file;
+            if (is_dir($path)) {
+                deleteDirectory($path);
+            } else {
+                unlink($path);
+            }
+        }
+    
+        rmdir($dir);
+    }
+    
+
+    function pathBase() {
+
+        $fold_base = Config::PATH_UPLOAD;
+        $substring = "stampee";
+        $position = strpos($fold_base, $substring);
+        $path_upload = substr($fold_base, 0, $position + strlen($substring));
+        return $path_upload."\public\assets\stamp\\";
+    } 
+
 }

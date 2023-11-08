@@ -6,10 +6,10 @@
 
     <main>
 
-        <section class="my_auctions">
+        <section class="index_list">
             <h1 class="title">Mes Enchères</h1>
             <table>
-                <tr class="my_actions-title">
+                <tr class="index_list-title">
                     <th>image</th>
                     <th>lot #</th>
                     <th>titre</th>
@@ -27,8 +27,13 @@
                 </tr>
                 {% if auctions|length > 0 %}
                     {% for auction in auctions %}
-                        <tr class="my_actions-datas">
-                            <td><img src="{{path_root}}assets/img/no-image.png" alt="no-image"></td>
+                        <tr class="index_list-datas">
+                            {% if auction.file_name == null %}
+                                <td><img src="{{path_root}}public/assets/img/no-image.png" alt="stamp"></td>
+                            {% else %}
+                                <td><img src="{{path_root}}public/assets/stamp/{{auction.stamp_id}}/{{auction.file_name}}" alt="stamp"></td>
+                            {% endif %}
+
                             <td>{{ auction.id }}</td>
                             <td>{{ auction.name }}</td>
                             <td>{{ auction.country }}</td>

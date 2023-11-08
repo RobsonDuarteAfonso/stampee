@@ -1,20 +1,20 @@
 
-{% if session.error is defined %}
+{% if errors is defined %}
     <div class="msg_error">
-        {% if session.error is iterable %}
+        {% if errors is iterable %}
             <p><strong>LES ERREURS:</strong></p>
-            {% for error in session.error %}
+            {% for error in errors %}
             <p>- {{ error }}</p>
             {% endfor %}
         {% else %}
-            <p><strong>LE ERREUR:</strong> {{ session.error }}</p>
+            <p><strong>LE ERREUR:</strong> {{ errors }}</p>
         {% endif %}
     </div>
     
 {% endif %}
 
-{% if session.success is defined %}
+{% if message is defined %}
     <div class="msg_success">
-        <p>{{ session.success }}</p>
+        <p>{{ message }}</p>
     </div>
 {% endif %}

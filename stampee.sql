@@ -103,9 +103,6 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `stampee`.`auction` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `name` VARCHAR(45) NOT NULL,
-  `description` TEXT NOT NULL,
-  `country` VARCHAR(45) NOT NULL,
   `date_start` DATE NOT NULL,
   `date_end` DATE NOT NULL,
   `price` DECIMAL(18,2) NOT NULL,
@@ -219,6 +216,7 @@ CREATE TABLE IF NOT EXISTS `stampee`.`bid` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
+
 
 
 

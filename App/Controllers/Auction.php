@@ -28,6 +28,8 @@ class Auction extends \Core\Controller
             
             CheckSession::sessionAuth();
 
+            //getMyStamps()
+
             View::renderTemplate('Auction/create.html');
 
         } catch (Exception $ex) {

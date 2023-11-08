@@ -9,17 +9,6 @@
         <section class="login">
             <h1 class="title">Login</h1>
             {% include 'message.html' %}
-            <?php 
-            
-                if (isset($_SESSION['error'])) {
-                    unset($_SESSION['error']);
-                }
-    
-                if (isset($_SESSION['success'])) {
-                    unset($_SESSION['success']);
-                }
-
-            ?>
             <form action="{{path_root}}public/user/auth" method="post">
                 <label for="email">Utilisateur</label>
                 <input type="email" class="input_default" name="email" id="email" placeholder="Utilisateur">

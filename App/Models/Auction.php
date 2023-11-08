@@ -12,9 +12,9 @@ class Auction extends \Core\Model
         $db = static::getDB();
 
         $stmt = $db->query('SELECT * FROM auction auc
-            INNER JOIN state ste ON ste.id = auc.state_id
+            INNER JOIN stamp stp ON stp.id = auc.stamp_id
             INNER JOIN status stu ON stu.id = auc.status_id
-            WHERE user_id = ' . $_SESSION['user_id']);
+            WHERE auc.user_id = ' . $_SESSION['user_id']);
 
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }

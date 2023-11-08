@@ -178,5 +178,38 @@ class Stamp extends \Core\Model
         } catch (Exception $ex) {            
             throw new Exception($stmt->errorInfo(), 1);
         }
-    }    
+    }
+
+    public static function delete($id) 
+    {
+        try {
+
+            $db = static::getDB();
+
+            $sql = "DELETE FROM image WHERE stamp_id = :id";
+            $stmt = $db->prepare($sql);
+            $stmt->bindValue(":id", $id);
+
+            $stmt->execute();            
+
+            $sql2 = "DELETE FROM stamp WHERE id = :id AND user_id = :user";
+
+            $stmt2 = $db->prepare($sql2);
+            $stmt2->bindValue(":id", $id);
+            $stmt2->bindValue(":user", $_SESSION['user_id']);
+
+            $stmt2->execute();
+
+            $count = $stmt2->rowCount();
+
+            if ($count === 1) {
+                return true;
+            } else {
+                return false;
+            }
+
+        } catch (Exception $ex) {            
+            throw new Exception($stmt->errorInfo(), 1);
+        }
+    }
 }

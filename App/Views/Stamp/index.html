@@ -43,7 +43,8 @@
                                 <a href="{{path_root}}public/stamp/edit/{{ stamp.id }}" class="bt bt-md2 bt-bd-gray"><i class="material-icons">edit_square</i></a>
                             </td>
                             <td>
-                                <form action="{{path_root}}public/stamp/delete" method="post">
+                                <form action="{{path_root}}public/stamp/confirm" method="post">
+                                    <input type="hidden" name="id" value="{{ stamp.id }}">
                                     <button type="submit" class="bt bt-md2 bt-bd-gray"><i class="material-icons">remove_circle</i></button>
                                 </form>
                             </td>

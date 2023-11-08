@@ -6,21 +6,22 @@
 
     <main>
 
-        <section class="create_auction">
+        <section class="create">
             <h1 class="title">Ajouter une Enchère</h1>
             {% include 'message.html' %}
             <form action="{{path_root}}public/auction/store" method="post">
                 <input type="hidden" name="user_id" value="{{ session.user_id }}">
                 <input type="hidden" name="status_id" value="1">
-                
-                <label for="name">Titre</label>
-                <input type="text" class="input_default" name="name" id="name" placeholder="Titre" required>
 
-                <label for="description">Description</label>
-                <textarea name="description" id="description" cols="30" rows="10" required></textarea>
-
-                <label for="country">Pays</label>
-                <input type="text" class="input_default" name="country" id="country" placeholder="Pays" required>
+                <label for="state">Timbre</label>
+                <select name="state_id" id="state" class="select_default" required>
+                    <option value="">Sélectionner</option>
+                    {% if stamps|length > 0 %}
+                        {% for stamp in stamps %}
+                            <option value="{{ stamp.id }}">{{ stamp.title }}</option>
+                        {% endfor %}
+                    {% endif %}
+                </select>
 
                 <label for="price">Prix</label>
                 <input type="text" class="input_default" name="price" id="price" placeholder="Prix" required>
@@ -30,26 +31,6 @@
 
                 <label for="date_end">Date Finale</label>
                 <input type="date" class="input_default" name="date_end" id="date_end" placeholder="Date Finale" required>
-
-                <label for="state">State</label>
-                <select name="state_id" id="state" required>
-                    <option value="">Sélectionner</option>
-                    {% if states|length > 0 %}
-                        {% for item in states %}
-                            <option value="{{ item.id }}">{{ item.state }}</option>
-                        {% endfor %}
-                    {% endif %}
-                </select>
-
-                <!-- <label for="status">Status</label>
-                <select name="status_id" id="status">
-                    <option value="0">Sélectionner</option>
-                    {% if status|length > 0 %}
-                        {% for item in status %}
-                            <option value="{{ item.id }}">{{ item.status }}</option>
-                        {% endfor %}
-                    {% endif %}
-                </select>                 -->
 
                 <button type="submit" class="bt bt-md bt-bg-red">
                     <span class="material-icons">send</span>Envoyer

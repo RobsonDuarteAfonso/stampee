@@ -13,11 +13,19 @@ namespace Core;
 
                 case 'updatedSuccess':
                     return "$extra modifié avec succès !";
+                    break;
+
+                case 'deletedSuccess':
+                    return "$extra supprimé avec succès !";
+                    break;
+
+                case 'deletedError':
+                    return "Une erreur s'est produite lors de la tentative de suppression $extra ! !";
                     break;                    
 
                 case 'uploadSuccess':
                     return "Le téléversement de l'image s'est terminé avec succès !";
-                    break;                    
+                    break;
 
                 case 'notMethodPost':
                     return "Méthode d'envoi de données incorrecte. Veuillez utiliser le formulaire !";

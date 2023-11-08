@@ -1,32 +1,33 @@
 {% extends "base.html" %}
 
-{% block title %}Ajouter un Timbre{% endblock %}
+{% block title %}Supprimer le Timbre{% endblock %}
 
 {% block main %}
 
     <main>
 
         <section class="create">
-            <h1 class="title">Ajouter un Timbre</h1>
+            <h1 class="title">Supprimer le Timbre</h1>
             {% include 'message.html' %}
-            <form action="{{path_root}}public/stamp/store" method="post">
-                <input type="hidden" name="user_id" value="{{ session.user_id }}">
+
+            <form action="{{path_root}}public/stamp/delete" method="post">
+                <input type="hidden" name="id" value="{{ data[0].id }}">
                 
                 <label for="title">Titre</label>
-                <input type="text" class="input_default" name="title" id="title" placeholder="Titre" value="{{data.title}}">
+                <input type="text" class="input_default" name="title" id="title" placeholder="Titre" value="{{data[0].title}}" disabled>
 
                 <label for="description">Description</label>
-                <textarea name="description" id="description" cols="30" rows="10">{{data.description}}</textarea>
+                <textarea name="description" id="description" cols="30" rows="10" disabled>{{data[0].description}}</textarea>
 
                 <label for="country">Pays</label>
-                <select name="country_id" id="country" class="select_default">
+                <select name="country_id" id="country" class="select_default" disabled>
                     <option value="">Sélectionner</option>
                     {% if countries|length > 0 %}
                         {% for item in countries %}
                             
                             <option value="{{ item.id }}" 
                             {% if data|length > 0 %} 
-                                {% if data.country_id == item.id %} selected {% endif %}
+                                {% if data[0].country_id == item.id %} selected {% endif %}
                             {% endif %}
                             >
                             {{ item.name }} ({{ item.iso }})
@@ -36,13 +37,13 @@
                 </select>
 
                 <label for="state">State</label>
-                <select name="state_id" id="state" class="select_default">
+                <select name="state_id" id="state" class="select_default" disabled>
                     <option value="">Sélectionner</option>
                     {% if states|length > 0 %}
                         {% for item in states %}
                             <option value="{{ item.id }}"
                             {% if data|length > 0 %} 
-                                {% if data.state_id == item.id %} selected {% endif %}
+                                {% if data[0].state_id == item.id %} selected {% endif %}
                             {% endif %}
                             >
                             {{ item.state }}
@@ -50,10 +51,12 @@
                         {% endfor %}
                     {% endif %}
                 </select>
+                <p>Remarque : Toutes les images de ce timbre seront supprimées.</p>
+                <br>
                 <div class="buttons">
-                    <button type="submit" class="bt bt-md bt-bg-red"><span class="material-icons">send</span>Envoyer</button>
+                    <button type="submit" class="bt bt-md bt-bg-red"><span class="material-icons">delete</span>Supprimer</button>
                     <button type="button" class="bt bt-md2 bt-bd-gray" value="Annuler" onclick="goBack()"><span class="material-icons">do_disturb_on</span>Annuler</button>
-                </div>
+                </div> 
             </form>
         </header>
 
