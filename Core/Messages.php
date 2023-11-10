@@ -11,6 +11,10 @@ namespace Core;
                     return "$extra créé avec succès !";
                     break;
 
+                case 'bidSentSuccess':
+                    return "Offre faite avec succès !";
+                    break;                    
+
                 case 'updatedSuccess':
                     return "$extra modifié avec succès !";
                     break;
@@ -20,7 +24,7 @@ namespace Core;
                     break;
 
                 case 'deletedError':
-                    return "Une erreur s'est produite lors de la tentative de suppression $extra ! !";
+                    return "Une erreur s'est produite lors de la tentative de suppression $extra !";
                     break;                    
 
                 case 'uploadSuccess':
@@ -35,9 +39,9 @@ namespace Core;
                     return "Nom d'utilisateur ou mot de passe invalide !";
                     break;
 
-                case 'invalidAccessStamp':
-                    return "Vous essayez d'accéder à un timbre qui ne vous appartient pas !";
-                    break;
+                case 'invalidAccess':
+                    return "Vous essayez d'accéder à un $extra qui ne vous appartient pas !";
+                    break;                 
 
                 case 'invalidTypeImage':
                     return "Type de fichier non valide pour le téléchargement, uniquement autorisé : jpg, jpeg, png et gif.";

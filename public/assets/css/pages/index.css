@@ -16,7 +16,7 @@
     padding: 0 5px;
 }
 
-.index_list-datas td {
+.index_list-datas td:not(:nth-child(3)):not(:nth-child(4)) {
     text-align: center;
 }
 
@@ -29,4 +29,11 @@
 .index_list-datas > td > img {
     width: 42px;
     height: 54px;
+}
+
+.container_bid {
+    display: flex;
+    margin-top: var(--space-xs);
+    align-items: center;
+    
 }

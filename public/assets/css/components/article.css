@@ -63,7 +63,6 @@ article > h1 {
 .list article {
     display: flex;
     width: 100%;
-    height: auto;
     padding: var(--space-md);
     align-items: center;
     flex-wrap: wrap;

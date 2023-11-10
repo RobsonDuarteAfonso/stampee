@@ -1,13 +1,13 @@
 {% extends "base.html" %}
 
-{% block title %}Ajouter une Enchère{% endblock %}
+{% block title %}Faire une Offre{% endblock %}
 
 {% block main %}
 
     <main>
 
         <section class="create">
-            <h1 class="title">Ajouter une Enchère</h1>
+            <h1 class="title">Faire une Offre - Lot #{{data[0].id}}</h1>
             {% include 'message.html' %}
             <form action="{{path_root}}public/auction/store" method="post">
                 <input type="hidden" name="user_id" value="{{ session.user_id }}">

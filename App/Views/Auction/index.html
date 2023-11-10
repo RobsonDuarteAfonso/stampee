@@ -54,10 +54,11 @@
 
         <section class="article_list">
             <h1 class="title">Catalogue</h1>
+            {% include 'message.html' %}
             <!-- Le remplacement de la classe "card" par "list" modifie le mode d'affichage de la liste des enchères. -->
             <div class="container list">
                 <!-- Si vous ajoutez la classe "invisible", les favoris ne seront plus affichés. -->
-                <section class="favorites">
+<!--                 <section class="favorites">
                     <h1 class="favorites_title">Favoris</h1>
                     <article>
                         <figure>
@@ -131,43 +132,58 @@
                             <a href="#" class="bt bt-md bt-bd-gray"><span class="material-icons">remove_circle</span>Enlever des favoris</a>
                         </footer>
                     </article>                                      
-                </section>
-                <article>
-                    <figure>
-                        <img src="../../assets/img/timbre1.png" alt="Timbre 1">                            
-                    </figure>
-                    <h1>Titre du Timbre Lord Stampee</h1>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Lot #</th>
-                                <th>Vl. Initiale</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>3452</td>
-                                <td>300.00 $</td>
-                            </tr>
-                        </tbody>
-                        <thead>
-                            <tr>
-                                <th>Offre Actuelle</th>
-                                <th>Fermeture</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>149.00 $</td>
-                                <td>2023-11-23</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <footer>
-                        <a href="#" class="bt bt-md bt-bg-red"><span class="material-icons">beenhere</span>Faire une offre</a>
-                        <a href="#" class="bt bt-md bt-bd-gray"><span class="material-icons">favorite</span>Ajouter aux favori</a>
-                    </footer>
-                </article>                                                                                
+                </section> -->
+                {% if auctions|length > 0 %}
+                    {% for auction in auctions %}
+                    <article>
+                        <figure>
+                            <img src="{{path_root}}public/assets/stamp/{{auction.stamp_id}}/{{auction.file_name}}" alt="Timbre">                            
+                        </figure>
+                        <h1>{{auction.title}}</h1>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Lot #</th>
+                                    <th>Vl. Initiale</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>{{auction.id}}</td>
+                                    <td>{{auction.price}} $</td>
+                                </tr>
+                            </tbody>
+                            <thead>
+                                <tr>
+                                    <th>Offre Actuelle</th>
+                                    <th>Fermeture</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>{{auction.best_bid}} $</td>
+                                    <td>{{auction.date_end}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <footer>
+                            {% if auction.user_id != session.user_id %}
+                            <form data-js-form action="{{path_root}}public/auction/bid" method="post">
+                                <input type="hidden" name="user_id" value="{{ session.user_id }}">
+                                <input type="hidden" name="auction_id" value="{{auction.id}}">
+                                <div class="container_bid">
+                                    <label for="bid">$
+                                        <input type="text" class="input_bid" id="bid" name="value">
+                                    </label>
+                                    <button type="submit" class="bt bt-md2 bt-bg-red" data-js-btn><span class="material-icons">beenhere</span>Mise</button>
+                                </div>
+                            </form>
+                            {% endif %}
+                            <a href="#" class="bt bt-md bt-bd-gray"><span class="material-icons">favorite</span>Ajouter aux favori</a>
+                        </footer>
+                    </article>
+                    {% endfor %}
+                {% endif %}                
             </div>        
             
             <div class="pagination">

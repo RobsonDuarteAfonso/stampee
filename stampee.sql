@@ -198,8 +198,8 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `stampee`.`bid` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `price` DECIMAL(18,2) NOT NULL,
-  `date` DATETIME NOT NULL,
+  `value` DECIMAL(18,2) NOT NULL,
+  `date` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP(),
   `auction_id` INT NOT NULL,
   `user_id` INT NOT NULL,
   PRIMARY KEY (`id`),

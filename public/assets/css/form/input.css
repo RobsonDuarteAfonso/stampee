@@ -9,3 +9,8 @@
 .select_default {
     width: 300px;
 }
+
+.input_bid {
+    width: 105px;
+    height: 50px;
+}

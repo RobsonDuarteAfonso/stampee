@@ -1,17 +1,19 @@
 .msg_error {
-    padding: 10px;
-    margin-bottom: 10px;
+    padding: var(--space-sm);
+    margin-bottom: var(--space-sm);
     background-color: #ffb2b2;
     color: #e30613;;
     border: 1px solid #b70000;
     font-weight: bold;
+    margin-top: var(--space-sm);
 }
 
 .msg_success {
-    padding: 10px;
-    margin-bottom: 10px;
+    padding: var(--space-sm);
+    margin-bottom: var(--space-sm);
     background-color: #83e096;
     color: rgb(12, 132, 30);;
     border: 1px solid #038e11;
     font-weight: bold;
+    margin-top: var(--space-sm);
 }

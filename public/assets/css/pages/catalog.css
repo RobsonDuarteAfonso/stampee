@@ -26,8 +26,8 @@ main {
     flex-basis: 80%;
     padding: var(--space-md);
     display: flex;
-    justify-content: center;
     flex-wrap: wrap;
+    flex-direction: column;
     background-color: var(--white);
 }
 

@@ -79,7 +79,7 @@ class Stamp extends \Core\Controller
 
             } else {
 
-                $errors = Messages::getMessage("invalidAccessStamp");
+                $errors = Messages::getMessage("invalidAccess", "Timbre");
 
                 $liste = \App\Models\Stamp::getMyStamps();
 
@@ -195,7 +195,7 @@ class Stamp extends \Core\Controller
                 $val->name('Pays')->value($_POST['country_id'])->required();
                 $val->name('State')->value($_POST['state_id'])->required();
 
-                if($val->isSuccess()){
+                if ($val->isSuccess()) {
 
                     $inserted = \App\Models\Stamp::insert($_POST);
                     $message = Messages::getMessage("createdSuccess", "Timbre");
@@ -239,7 +239,7 @@ class Stamp extends \Core\Controller
                 $val->name('Pays')->value($_POST['country_id'])->required();
                 $val->name('State')->value($_POST['state_id'])->required();
 
-                if($val->isSuccess()){
+                if ($val->isSuccess()) {
 
                     \App\Models\Stamp::update($_POST);
                     $message = Messages::getMessage("updatedSuccess", "Timbre");
@@ -310,7 +310,7 @@ class Stamp extends \Core\Controller
 
             CheckSession::sessionAuth();
 
-            if(isset($_POST)) {
+            if (isset($_POST)) {
 
                 $stamp_id = $_POST['stamp_id'];
 
@@ -405,5 +405,4 @@ class Stamp extends \Core\Controller
         $path_upload = substr($fold_base, 0, $position + strlen($substring));
         return $path_upload."\public\assets\stamp\\";
     } 
-
 }

@@ -26,6 +26,26 @@ class Stamp extends \Core\Model
     }
 
 
+    public static function getMyStampsWithImage()
+    {
+        $db = static::getDB();
+
+        $stmt = $db->query('SELECT stp.id as id, title, description, name, iso, state, (
+                SELECT img.file_name
+                FROM image img
+                WHERE img.stamp_id = stp.id
+                LIMIT 1
+            ) as file_name
+            FROM stamp stp
+            INNER JOIN state ste ON ste.id = stp.state_id
+            INNER JOIN country ctr ON ctr.id = stp.country_id
+            WHERE user_id = ' . $_SESSION['user_id'].' AND
+             (SELECT img.file_name FROM image img WHERE img.stamp_id = stp.id LIMIT 1) IS NOT NULL');
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+
     public static function getStampForId($id)
     {
         $db = static::getDB();
