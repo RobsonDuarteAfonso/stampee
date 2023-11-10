@@ -9,86 +9,122 @@ class Stamp extends \Core\Model
 
     public static function getMyStamps()
     {
+        try {
+
         $db = static::getDB();
 
-        $stmt = $db->query('SELECT stp.id as id, title, description, name, iso, state, (
-                SELECT img.file_name
-                FROM image img
-                WHERE img.stamp_id = stp.id
-                LIMIT 1
-            ) as file_name
-            FROM stamp stp
-            INNER JOIN state ste ON ste.id = stp.state_id
-            INNER JOIN country ctr ON ctr.id = stp.country_id
-            WHERE user_id = ' . $_SESSION['user_id']);
+            $stmt = $db->query('SELECT stp.id as id, title, description, name, iso, state, (
+                    SELECT img.file_name
+                    FROM image img
+                    WHERE img.stamp_id = stp.id
+                    LIMIT 1
+                ) as file_name
+                FROM stamp stp
+                INNER JOIN state ste ON ste.id = stp.state_id
+                INNER JOIN country ctr ON ctr.id = stp.country_id
+                WHERE user_id = ' . $_SESSION['user_id']);
 
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        } catch (Exception $ex) {            
+            throw new Exception($stmt->errorInfo(), 1);
+        }        
     }
 
 
     public static function getMyStampsWithImage()
     {
-        $db = static::getDB();
+        try {
 
-        $stmt = $db->query('SELECT stp.id as id, title, description, name, iso, state, (
-                SELECT img.file_name
-                FROM image img
-                WHERE img.stamp_id = stp.id
-                LIMIT 1
-            ) as file_name
-            FROM stamp stp
-            INNER JOIN state ste ON ste.id = stp.state_id
-            INNER JOIN country ctr ON ctr.id = stp.country_id
-            WHERE user_id = ' . $_SESSION['user_id'].' AND
-             (SELECT img.file_name FROM image img WHERE img.stamp_id = stp.id LIMIT 1) IS NOT NULL');
+            $db = static::getDB();
 
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+            $stmt = $db->query('SELECT stp.id as id, title, description, name, iso, state, (
+                    SELECT img.file_name
+                    FROM image img
+                    WHERE img.stamp_id = stp.id
+                    LIMIT 1
+                ) as file_name
+                FROM stamp stp
+                INNER JOIN state ste ON ste.id = stp.state_id
+                INNER JOIN country ctr ON ctr.id = stp.country_id
+                WHERE user_id = ' . $_SESSION['user_id'].' AND
+                (SELECT img.file_name FROM image img WHERE img.stamp_id = stp.id LIMIT 1) IS NOT NULL');
+
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        } catch (Exception $ex) {            
+            throw new Exception($stmt->errorInfo(), 1);
+        }
     }
 
 
     public static function getStampForId($id)
     {
-        $db = static::getDB();
-        $sql = 'SELECT * FROM stamp WHERE id = :id';
+        try {
 
-        $stmt = $db->prepare($sql);
-        $stmt->bindValue(":id", $id);
-        
-        $stmt->execute();
-        
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+            $db = static::getDB();
+            $sql = 'SELECT * FROM stamp WHERE id = :id';
+
+            $stmt = $db->prepare($sql);
+            $stmt->bindValue(":id", $id);
+            
+            $stmt->execute();
+            
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        } catch (Exception $ex) {            
+            throw new Exception($stmt->errorInfo(), 1);
+        }        
     }
 
 
     public static function getStates()
     {
-        $db = static::getDB();
-        $stmt = $db->query('SELECT * FROM state');
-            
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        try {
+
+            $db = static::getDB();
+            $stmt = $db->query('SELECT * FROM state');
+                
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        } catch (Exception $ex) {            
+            throw new Exception($stmt->errorInfo(), 1);
+        }        
     }
 
 
     public static function getCountries()
     {
-        $db = static::getDB();
-        $stmt = $db->query('SELECT * FROM country');
-            
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        try {
+
+            $db = static::getDB();
+            $stmt = $db->query('SELECT * FROM country');
+                
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        } catch (Exception $ex) {            
+            throw new Exception($stmt->errorInfo(), 1);
+        }        
     }
 
 
     public static function getImages($id)
     {
-        $db = static::getDB();
-        $sql = 'SELECT * FROM image WHERE stamp_id = :id';
+        try {
 
-        $stmt = $db->prepare($sql);
-        $stmt->bindValue(":id", $id);
-        
-        $stmt->execute();
-        
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+            $db = static::getDB();
+            $sql = 'SELECT * FROM image WHERE stamp_id = :id';
+
+            $stmt = $db->prepare($sql);
+            $stmt->bindValue(":id", $id);
+            
+            $stmt->execute();
+            
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        } catch (Exception $ex) {            
+            throw new Exception($stmt->errorInfo(), 1);
+        }        
     }    
 
 
@@ -156,21 +192,27 @@ class Stamp extends \Core\Model
 
     public static function insertImage($id, $name)
     {
-        if ($id) {
+        try {
 
-            $db = static::getDB();
-            $sql = "INSERT INTO image (file_name, stamp_id) VALUES (:file_name, :id)";
+            if ($id) {
 
-            $stmt = $db->prepare($sql);
-            $stmt->bindValue(":file_name", $name);
-            $stmt->bindValue(":id", $id);
-        }
-        
-        if($stmt->execute()) {
-            return $db->lastInsertId();
-        } else {
+                $db = static::getDB();
+                $sql = "INSERT INTO image (file_name, stamp_id) VALUES (:file_name, :id)";
+
+                $stmt = $db->prepare($sql);
+                $stmt->bindValue(":file_name", $name);
+                $stmt->bindValue(":id", $id);
+            }
+            
+            if($stmt->execute()) {
+                return $db->lastInsertId();
+            } else {
+                throw new Exception($stmt->errorInfo(), 1);
+            }
+
+        } catch (Exception $ex) {            
             throw new Exception($stmt->errorInfo(), 1);
-        }
+        }        
     }
 
 

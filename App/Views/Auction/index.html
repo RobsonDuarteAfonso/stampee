@@ -58,81 +58,63 @@
             <!-- Le remplacement de la classe "card" par "list" modifie le mode d'affichage de la liste des enchères. -->
             <div class="container list">
                 <!-- Si vous ajoutez la classe "invisible", les favoris ne seront plus affichés. -->
-<!--                 <section class="favorites">
+                 <section class="favorites">
                     <h1 class="favorites_title">Favoris</h1>
-                    <article>
-                        <figure>
-                            <img src="../../assets/img/timbre1.png" alt="Timbre 1">                            
-                        </figure>
-                        <h1>Titre du Timbre Lord Stampee</h1>
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Lot #</th>
-                                    <th>Vl. Initiale</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>3452</td>
-                                    <td>300.00 $</td>
-                                </tr>
-                            </tbody>
-                            <thead>
-                                <tr>
-                                    <th>Offre Actuelle</th>
-                                    <th>Fermeture</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>149.00 $</td>
-                                    <td>2023-11-23</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <footer>
-                            <a href="#" class="bt bt-md bt-bg-red"><span class="material-icons">beenhere</span>Faire une offre</a>
-                            <a href="#" class="bt bt-md bt-bd-gray"><span class="material-icons">remove_circle</span>Enlever des favoris</a>
-                        </footer>
-                    </article>
-                    <article>
-                        <figure>
-                            <img src="../../assets/img/timbre2.png" alt="Timbre 2">
-                        </figure>
-                        <h1>Titre du Timbre Lord Stampee</h1>
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Lot #</th>
-                                    <th>Vl. Initiale</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>3452</td>
-                                    <td>300.00 $</td>
-                                </tr>
-                            </tbody>
-                            <thead>
-                                <tr>
-                                    <th>Offre Actuelle</th>
-                                    <th>Fermeture</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>149.00 $</td>
-                                    <td>2023-11-23</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <footer>
-                            <a href="#" class="bt bt-md bt-bg-red"><span class="material-icons">beenhere</span>Faire une offre</a>
-                            <a href="#" class="bt bt-md bt-bd-gray"><span class="material-icons">remove_circle</span>Enlever des favoris</a>
-                        </footer>
-                    </article>                                      
-                </section> -->
+                    {% if favorites|length > 0 %}
+                        {% for favorite in favorites %}
+                            <article>
+                                <figure>
+                                    <img src="{{path_root}}public/assets/stamp/{{favorite.stamp_id}}/{{favorite.file_name}}" alt="Timbre">
+                                </figure>
+                                <h1>{{favorite.title}}</h1>
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Lot #</th>
+                                            <th>Vl. Initiale</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>{{favorite.id}}</td>
+                                            <td>{{favorite.price}} $</td>
+                                        </tr>
+                                    </tbody>
+                                    <thead>
+                                        <tr>
+                                            <th>Offre Actuelle</th>
+                                            <th>Fermeture</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>{{favorite.best_bid}} $</td>
+                                            <td>{{favorite.date_end}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                {% if favorite.user_id != session.user_id %}
+                                    <footer>
+                                    <form action="{{path_root}}public/auction/bid" method="post">
+                                        <input type="hidden" name="user_id" value="{{ session.user_id }}">
+                                        <input type="hidden" name="auction_id" value="{{favorite.id}}">
+                                        <div class="container_bid">
+                                            <input type="text" class="input_bid" id="bid" name="value" placeholder="$">
+                                            <button type="submit" class="bt bt-md2 bt-bg-red"><span class="material-icons">beenhere</span>Mise</button>
+                                        </div>
+                                    </form>
+                                    <form action="#" method="post">
+                                        <input type="hidden" name="user_id" value="{{ session.user_id }}">
+                                        <input type="hidden" name="auction_id" value="{{favorite.id}}">
+                                        <button type="submit" class="bt bt-md bt-bd-gray btn-favorite"><span class="material-icons">remove_circle</span>Enlever des favoris</button>
+                                    </form>
+                                    </footer>                            
+                                {% endif %}                        
+                            </article>
+                        {% endfor %}
+                    {% endif %}
+                </section>
+                
                 {% if auctions|length > 0 %}
                     {% for auction in auctions %}
                     <article>
@@ -168,24 +150,30 @@
                         </table>
                         <footer>
                             {% if auction.user_id != session.user_id %}
-                            <form data-js-form action="{{path_root}}public/auction/bid" method="post">
+                            <form action="{{path_root}}public/auction/bid" method="post">
                                 <input type="hidden" name="user_id" value="{{ session.user_id }}">
                                 <input type="hidden" name="auction_id" value="{{auction.id}}">
                                 <div class="container_bid">
-                                    <label for="bid">$
-                                        <input type="text" class="input_bid" id="bid" name="value">
-                                    </label>
-                                    <button type="submit" class="bt bt-md2 bt-bg-red" data-js-btn><span class="material-icons">beenhere</span>Mise</button>
+                                    <input type="text" class="input_bid" id="bid" name="value" placeholder="$">
+                                    <button type="submit" class="bt bt-md2 bt-bg-red"><span class="material-icons">beenhere</span>Mise</button>
                                 </div>
                             </form>
+                            
+                                {% if auction.id not in favorites %}
+                                    <form action="{{path_root}}public/auction/addfavorite" method="post">
+                                        <input type="hidden" name="user_id" value="{{ session.user_id }}">
+                                        <input type="hidden" name="auction_id" value="{{auction.id}}">
+                                        <button type="submit" class="bt bt-md bt-bd-gray btn-favorite"><span class="material-icons">favorite</span>Ajouter aux favori</button>
+                                    </form>
+                                {% endif %}
                             {% endif %}
-                            <a href="#" class="bt bt-md bt-bd-gray"><span class="material-icons">favorite</span>Ajouter aux favori</a>
+                            
                         </footer>
                     </article>
                     {% endfor %}
                 {% endif %}                
             </div>        
-            
+
             <div class="pagination">
                 <button type="button" class="bt bt-x3 bt-bg-red"><i class="material-icons">navigate_before</i></button>
                 <button type="button" class="bt bt-x3 bt-bg-red"><i class="material-icons">first_page</i></button>

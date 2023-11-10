@@ -17,8 +17,9 @@ class Auction extends \Core\Controller
         try {
 
             $liste = \App\Models\Auction::getAllInProgress();
+            $favorites = \App\Models\Auction::getMyFavorite($_SESSION['user_id']);
 
-            View::renderTemplate('Auction/index.html',['auctions'=>$liste]);
+            View::renderTemplate('Auction/index.html',['auctions'=>$liste, 'favorites'=>$favorites]);
 
         } catch (Exception $ex) {
             $erros = array();
@@ -92,6 +93,38 @@ class Auction extends \Core\Controller
     }
 
 
+    public function addfavoriteAction()
+    {
+        try {
+
+            CheckSession::sessionAuth();
+
+            if (!empty($_POST)) {
+
+
+                    $inserted = \App\Models\Auction::insertFavorite($_POST);
+                    $message = Messages::getMessage("addFavoriteSuccess");
+                    
+                    $liste = \App\Models\Auction::getAllInProgress();
+                    $favorites = \App\Models\Auction::getMyFavorite($_SESSION['user_id']);
+
+                    View::renderTemplate('auction/index.html', ['message'=>$message, 'auctions'=>$liste, 'favorites'=>$favorites]);
+
+            }
+
+        } catch (Exception $ex) {
+            $erros = array();
+            $errors[] = $ex->getMessage();
+
+            $liste = \App\Models\Auction::getAllInProgress();
+            $favorites = \App\Models\Auction::getMyFavorite($_SESSION['user_id']);
+
+            View::renderTemplate('Auction/index.html', ['errors'=>$errors, 'auctions'=>$liste, 'favorites'=>$favorites]);
+        }        
+    }
+    
+    
+
     public function myauctionsAction()
     {
         try {
@@ -120,21 +153,41 @@ class Auction extends \Core\Controller
                 $val = new \Core\Validation();
                 $val->name('Offre')->value($_POST['value'])->required()->pattern('float')->min(1);
 
-                if ($val->isSuccess()) {                
+                if ($val->isSuccess()) {  
+                    
+                    if (\App\Models\Auction::getMaxBid($_POST['auction_id'], $_POST['user_id']) > $_POST['value']) {
+
+                        $errors = Messages::getMessage("lowestBidError");
+                        $liste = \App\Models\Auction::getAllInProgress();
+                        $favorites = \App\Models\Auction::getMyFavorite($_SESSION['user_id']);
+            
+                        View::renderTemplate('Auction/index.html', ['errors'=>$errors, 'auctions'=>$liste, 'data'=>$_POST,  'favorites'=>$favorites]);
+                    }
+
+                    if (\App\Models\Auction::getPriceInicial($_POST['auction_id']) > $_POST['value']) {
+
+                        $errors = Messages::getMessage("lowestBidPriceInitialError");
+                        $liste = \App\Models\Auction::getAllInProgress();
+                        $favorites = \App\Models\Auction::getMyFavorite($_SESSION['user_id']);
+            
+                        View::renderTemplate('Auction/index.html', ['errors'=>$errors, 'auctions'=>$liste, 'data'=>$_POST, 'favorites'=>$favorites]);
+                    }                    
 
                     $inserted = \App\Models\Auction::insertBid($_POST);
                     $message = Messages::getMessage("bidSentSuccess");
                     
                     $liste = \App\Models\Auction::getAllInProgress();
+                    $favorites = \App\Models\Auction::getMyFavorite($_SESSION['user_id']);
 
-                    View::renderTemplate('auction/index.html', ['message'=>$message, 'auctions'=>$liste]);
+                    View::renderTemplate('auction/index.html', ['message'=>$message, 'auctions'=>$liste, 'data'=>$_POST, 'favorites'=>$favorites]);
 
                 } else {
 
                     $errors = $val->getErrors();
                     $liste = \App\Models\Auction::getAllInProgress();
-
-                    View::renderTemplate('auction/index.html', ['errors'=>$errors, 'data'=>$_POST, 'auctions'=>$liste]);
+                    $favorites = \App\Models\Auction::getMyFavorite($_SESSION['user_id']);
+        
+                    View::renderTemplate('Auction/index.html', ['errors'=>$errors, 'auctions'=>$liste, 'data'=>$_POST, 'favorites'=>$favorites]);
                 }
             }
 
@@ -143,9 +196,10 @@ class Auction extends \Core\Controller
             $errors[] = $ex->getMessage();
 
             $liste = \App\Models\Auction::getAllInProgress();
+            $favorites = \App\Models\Auction::getMyFavorite($_SESSION['user_id']);
 
-            View::renderTemplate('auction/index.html', ['errors'=>$errors, 'data'=>$_POST, 'auctions'=>$liste]);
-}        
+            View::renderTemplate('Auction/index.html', ['errors'=>$errors, 'auctions'=>$liste, 'data'=>$_POST, 'favorites'=>$favorites]);
+        }        
     }    
 
 

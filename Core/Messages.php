@@ -44,11 +44,23 @@ namespace Core;
                     break;                 
 
                 case 'invalidTypeImage':
-                    return "Type de fichier non valide pour le téléchargement, uniquement autorisé : jpg, jpeg, png et gif.";
+                    return "Type de fichier non valide pour le téléchargement, uniquement autorisé: jpg, jpeg, png et gif.";
                     break;
 
                 case 'uploadError':
                     return "Erreur lors du téléchargement de fichiers";
+                    break;
+
+                case 'lowestBidError':
+                    return "Le montant de l'offre que vous essayez de soumettre est inférieur à l'offre actuelle.";
+                    break;
+
+                case 'lowestBidPriceInitialError':
+                    return "Le montant de l'offre que vous essayez de soumettre est inférieur au montant de l'enchère initiale.";
+                    break;
+
+                case 'addFavoriteSuccess':
+                    return "Enchère ajoutée avec succès à votre liste de favoris !";
                     break;
             }
         }
